@@ -1,0 +1,5 @@
+polmedia:
+    resource: "@PolmediaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
