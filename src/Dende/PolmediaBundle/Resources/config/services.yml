@@ -1,0 +1,17 @@
+parameters:
+    video.class:                Dende\PolmediaBundle\Entity\Video
+    video_repository.class:     Dende\PolmediaBundle\Entity\VideoRepository
+    category.class:             Dende\PolmediaBundle\Entity\Category
+    category_repository.class:  Dende\PolmediaBundle\Entity\CategoryRepository
+
+services:
+    video_repository:
+        class:                  Doctrine\Common\Persistence\ObjectRepository
+        factory_service:        doctrine
+        factory_method:         getRepository
+        arguments:              [ "%video.class%" ]
+    category_repository:
+        class:                  Doctrine\Common\Persistence\ObjectRepository
+        factory_service:        doctrine
+        factory_method:         getRepository
+        arguments:              [ "%category.class%" ]
