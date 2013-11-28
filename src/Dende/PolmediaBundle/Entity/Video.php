@@ -10,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="videos")
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\VideoRepository")
  */
-class Video
-{
+class Video {
+
+    // <editor-fold defaultstate="collapsed" desc="fields">
     /**
      * @var integer
      *
@@ -90,15 +91,24 @@ class Video
      * @ORM\Column(name="is_main", type="boolean")
      */
     private $isMain;
+    
+    /**
+     * @var integer
+     * 
+     * @ORM\ManyToOne(targetEntity="Dende\PolmediaBundle\Entity\Category", inversedBy="videos",cascade={"persist"})
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $category;
+// </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -108,10 +118,9 @@ class Video
      * @param string $title
      * @return Video
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -120,8 +129,7 @@ class Video
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -131,10 +139,9 @@ class Video
      * @param string $directorsName
      * @return Video
      */
-    public function setDirectorsName($directorsName)
-    {
+    public function setDirectorsName($directorsName) {
         $this->directorsName = $directorsName;
-    
+
         return $this;
     }
 
@@ -143,8 +150,7 @@ class Video
      *
      * @return string 
      */
-    public function getDirectorsName()
-    {
+    public function getDirectorsName() {
         return $this->directorsName;
     }
 
@@ -154,10 +160,9 @@ class Video
      * @param string $productionYear
      * @return Video
      */
-    public function setProductionYear($productionYear)
-    {
+    public function setProductionYear($productionYear) {
         $this->productionYear = $productionYear;
-    
+
         return $this;
     }
 
@@ -166,8 +171,7 @@ class Video
      *
      * @return string 
      */
-    public function getProductionYear()
-    {
+    public function getProductionYear() {
         return $this->productionYear;
     }
 
@@ -177,10 +181,9 @@ class Video
      * @param string $cast
      * @return Video
      */
-    public function setCast($cast)
-    {
+    public function setCast($cast) {
         $this->cast = $cast;
-    
+
         return $this;
     }
 
@@ -189,8 +192,7 @@ class Video
      *
      * @return string 
      */
-    public function getCast()
-    {
+    public function getCast() {
         return $this->cast;
     }
 
@@ -200,10 +202,9 @@ class Video
      * @param string $duration
      * @return Video
      */
-    public function setDuration($duration)
-    {
+    public function setDuration($duration) {
         $this->duration = $duration;
-    
+
         return $this;
     }
 
@@ -212,8 +213,7 @@ class Video
      *
      * @return string 
      */
-    public function getDuration()
-    {
+    public function getDuration() {
         return $this->duration;
     }
 
@@ -223,10 +223,9 @@ class Video
      * @param string $prizes
      * @return Video
      */
-    public function setPrizes($prizes)
-    {
+    public function setPrizes($prizes) {
         $this->prizes = $prizes;
-    
+
         return $this;
     }
 
@@ -235,8 +234,7 @@ class Video
      *
      * @return string 
      */
-    public function getPrizes()
-    {
+    public function getPrizes() {
         return $this->prizes;
     }
 
@@ -246,10 +244,9 @@ class Video
      * @param string $plot
      * @return Video
      */
-    public function setPlot($plot)
-    {
+    public function setPlot($plot) {
         $this->plot = $plot;
-    
+
         return $this;
     }
 
@@ -258,8 +255,7 @@ class Video
      *
      * @return string 
      */
-    public function getPlot()
-    {
+    public function getPlot() {
         return $this->plot;
     }
 
@@ -269,10 +265,9 @@ class Video
      * @param string $youtube
      * @return Video
      */
-    public function setYoutube($youtube)
-    {
+    public function setYoutube($youtube) {
         $this->youtube = $youtube;
-    
+
         return $this;
     }
 
@@ -281,8 +276,7 @@ class Video
      *
      * @return string 
      */
-    public function getYoutube()
-    {
+    public function getYoutube() {
         return $this->youtube;
     }
 
@@ -292,10 +286,9 @@ class Video
      * @param boolean $isFront
      * @return Video
      */
-    public function setIsFront($isFront)
-    {
+    public function setIsFront($isFront) {
         $this->isFront = $isFront;
-    
+
         return $this;
     }
 
@@ -304,8 +297,7 @@ class Video
      *
      * @return boolean 
      */
-    public function getIsFront()
-    {
+    public function getIsFront() {
         return $this->isFront;
     }
 
@@ -315,10 +307,9 @@ class Video
      * @param boolean $isMain
      * @return Video
      */
-    public function setIsMain($isMain)
-    {
+    public function setIsMain($isMain) {
         $this->isMain = $isMain;
-    
+
         return $this;
     }
 
@@ -327,8 +318,9 @@ class Video
      *
      * @return boolean 
      */
-    public function getIsMain()
-    {
+    public function getIsMain() {
         return $this->isMain;
     }
+
+// </editor-fold>
 }

@@ -2,11 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>Polmedia.pl - {% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <nav>
+            <ul>
+                <li><a href="{{ path("main_page")}}">mainPage</a></li>
+                <li><a href="{{ path("categories")}}">categories</a></li>
+                <li><a href="{{ path("contact")}}">contact</a></li>
+                <li><a href="{{ path("static", {slug: "about"})}}">about company</a></li>
+            </ul>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

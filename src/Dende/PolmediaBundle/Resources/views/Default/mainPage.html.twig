@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<ul>
+{% for video in promotedVideos %}
+    <li>{{ video.getTitle() }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
