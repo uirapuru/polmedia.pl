@@ -16,19 +16,26 @@ class VideoRepository extends EntityRepository {
 
     public function getPromotedVideos() {
         return $this->createQueryBuilder("v")
-                ->where("v.isFront = true")
-                ->getQuery()
-                ->execute();
+                        ->where("v.isFront = true")
+                        ->getQuery()
+                        ->execute();
     }
 
     public function getVideos(Category $category = null) {
         return $this->createQueryBuilder("v")
-                ->where("v.category = :category")
-                ->setParameters(array(
-                    "category" => $category
-                ))
-                ->getQuery()
-                ->execute();
+                        ->where("v.category = :category")
+                        ->setParameters(array(
+                            "category" => $category
+                        ))
+                        ->getQuery()
+                        ->execute();
+    }
+
+    public function getAllVideos() {
+        return $this->createQueryBuilder("v")
+                ->innerJoin("v.category","c")
+                        ->getQuery()
+                        ->execute();
     }
 
 }

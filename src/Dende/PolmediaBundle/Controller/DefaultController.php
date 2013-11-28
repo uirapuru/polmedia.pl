@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
 use Dende\PolmediaBundle\Entity\Video;
 use Dende\PolmediaBundle\Entity\Category;
+use Dende\PolmediaBundle\Form\ContactType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller {
 
@@ -45,7 +46,7 @@ class DefaultController extends Controller {
         $videos = $this->get("video_repository")->getVideos($category);
 
         return array(
-            "videos" => $videos,
+            "videos"   => $videos,
             "category" => $category
         );
     }
@@ -54,8 +55,40 @@ class DefaultController extends Controller {
      * @Route("/contact", name="contact")
      * @Template()
      */
-    public function contactAction() {
-        return array();
+    public function contactAction(Request $request) {
+        $form = $this->createForm(new ContactType());
+
+        if ($request->isMethod('POST'))
+        {
+            $form->bind($request);
+
+            if ($form->isValid())
+            {
+                $message = \Swift_Message::newInstance()
+                        ->setSubject($form->get('subject')->getData())
+                        ->setFrom($form->get('email')->getData())
+                        ->setTo('contact@example.com')
+                        ->setBody(
+                        $this->renderView(
+                                'PolmediaBundle:Mail:contact.html.twig', array(
+                            'ip'      => $request->getClientIp(),
+                            'name'    => $form->get('name')->getData(),
+                            'message' => $form->get('message')->getData()
+                                )
+                        )
+                );
+
+                $this->get('mailer')->send($message);
+
+                $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
+
+                return $this->redirect($this->generateUrl('contact'));
+            }
+        }
+
+        return array(
+            "form" => $form->createView()
+        );
     }
 
     /**

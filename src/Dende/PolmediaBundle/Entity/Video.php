@@ -91,7 +91,7 @@ class Video {
      * @ORM\Column(name="is_main", type="boolean")
      */
     private $isMain;
-    
+
     /**
      * @var integer
      * 
@@ -99,9 +99,16 @@ class Video {
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
-// </editor-fold>
 
+// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getCategory() {
+        return $this->category;
+    }
+
+    public function setCategory($category) {
+        $this->category = $category;
+    }
 
     /**
      * Get id

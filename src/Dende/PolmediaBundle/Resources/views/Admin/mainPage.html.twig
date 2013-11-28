@@ -1,0 +1,24 @@
+admin index
+
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for video in videos %}
+        <tr>
+            <td><input type="checkbox" value="{{video.id}}" name="videos" /></td>
+            <td>{{ video.title }}</td>
+            <td>{{ video.getCategory().title }}</td>
+            <td><a href="#">edit</a></td>
+            <td><a href="#">delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
