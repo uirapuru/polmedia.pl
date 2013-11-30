@@ -17,18 +17,23 @@ class ContactType extends AbstractType
         $builder
             ->add('name', 'text', array(
                 'attr' => array(
-                    'placeholder' => 'What\'s your name?',
+                    'placeholder' => '',
                     'pattern'     => '.{2,}' //minlength
+                )
+            ))
+            ->add('company', 'text', array(
+                'attr' => array(
+                    'placeholder' => '',
                 )
             ))
             ->add('email', 'email', array(
                 'attr' => array(
-                    'placeholder' => 'So I can get back to you.'
+                    'placeholder' => ''
                 )
             ))
             ->add('subject', 'text', array(
                 'attr' => array(
-                    'placeholder' => 'The subject of your message.',
+                    'placeholder' => '',
                     'pattern'     => '.{3,}' //minlength
                 )
             ))
@@ -36,7 +41,7 @@ class ContactType extends AbstractType
                 'attr' => array(
                     'cols' => 90,
                     'rows' => 10,
-                    'placeholder' => 'And your message to me...'
+                    'placeholder' => ''
                 )
             ));
     }
