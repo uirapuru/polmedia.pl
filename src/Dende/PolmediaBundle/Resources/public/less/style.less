@@ -1,0 +1,267 @@
+@font-face {
+    font-family: Generica;
+    src: url('../fonts/generica.otf');
+}
+
+@font-face {
+    font-family: Generica;
+    font-weight: bold;
+    src: url('../fonts/generica-bold.otf');
+}
+
+@menu-bar-color: #000000; 
+@grey-scroller-elements-color: #222222;
+@dark-grey-scroller-elements-color: #161616;
+
+@column-width: 980px;
+@top-height: 75px;
+@navbar-height: 26px;
+
+@scroller-height: 278px;
+@scroller-side-border: 17px;
+@scroller-indicators-height: 28px;
+
+html,body {
+    font-family: Georgia, sans-serif;
+    color: #000000;
+    background-color: #000000;
+    background-image: url("../images/tlo-czarna-kratka.png");
+    margin:0;
+    padding:0;
+    height:100%; /* needed for container min-height */
+    font-family:arial,sans-serif;
+    font-size:small;
+
+    a {
+        color: inherit;
+    }
+
+    div#top {
+        height: @top-height;
+        overflow: hidden;
+
+        #ui-bar {
+            display: block;
+            background-color: @menu-bar-color;
+            height: @navbar-height;
+            position: absolute;
+            top: @top-height / 2 - @navbar-height / 2;
+            right: 0;
+            width: 50%;
+            z-index: 0;
+        }
+
+        nav {
+            position: relative;
+            width: @column-width;
+            margin-left: auto;
+            margin-right: auto;
+
+            >a {
+                margin: 12px 0 0 50px;
+                display: block;
+                height: 51px;
+                width: 191px;
+
+                >img {
+                    height: inherit;
+                    width: inherit;
+                }
+            }
+
+            ul {
+                display: block;
+                background-color: @menu-bar-color;
+                height: @navbar-height;
+                line-height: @navbar-height;
+                position: absolute;
+                top: 50%;
+                margin-top: -1 * @navbar-height / 2;
+                right: 0;
+                width: @column-width / 2;
+                z-index: 10;
+
+                li {                   
+                    padding-left: 23px;
+                    padding-right: 23px;
+                    line-height: inherit;
+                    a {
+                        color: #d7d7d7;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                        font-family: Generica, sans-serif;
+                        font-size: 19px;
+                        line-height: inherit;
+                    }
+                    &.active {
+                        a {
+                            color: #e80000;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    div#middle {
+        width: 100%;
+        background-color: @dark-grey-scroller-elements-color;
+        height: @scroller-height;
+        text-align: center;
+        position: relative;
+
+        .carcontrol {
+            background: transparent;
+            width: 50px;
+            height: 84px;
+            margin-top: -42px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            &.left {
+                margin-left: -1 * @column-width / 2 - 15px - 50px;
+            }
+            &.right {
+                margin-left: @column-width / 2 + 15px;
+            }
+        }
+
+        div#scroller {
+            width: @column-width - 2 * @scroller-side-border;
+            border-left: @scroller-side-border solid @grey-scroller-elements-color;
+            border-right: @scroller-side-border solid @grey-scroller-elements-color;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+
+            div.item {
+                img {
+                    width: @column-width - 2* @scroller-side-border;
+                    height: @scroller-height;
+                }
+            }
+
+            ol.carousel-indicators {
+                position: absolute;
+                top: @scroller-height - @scroller-indicators-height;
+                right: 0;
+                height: @scroller-indicators-height - 6;
+                line-height: @scroller-indicators-height - 6;
+                background-color: #000000;
+                padding: 3px 10px;
+
+                li {
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+
+                    background-color: #474948;
+                    -webkit-transition: all 500ms linear;
+                    -moz-transition: all 500ms linear;
+                    -ms-transition: all 500ms linear;
+                    -o-transition: all 500ms linear;
+                    transition: all 500ms linear;
+                    &.active {
+                        background-color: #e60100;
+                        -webkit-box-shadow:  0 0 5px 2px rgba(255, 0, 0, 1);
+                        box-shadow:  0 0 5px 2px rgba(255, 0, 0, 1);
+                    }
+                }
+            }
+
+        }
+    }
+
+    div#container {
+        background-color: rgba(255,255,255,1);
+        background-image: url("../images/biale-tlo-contentu.jpg");
+        position:relative; /* needed for footer positioning*/
+        margin:0 auto; /* center, not in IE5 */
+        width: @column-width;
+
+        height:auto !important; /* real browsers */
+        height:100%; /* IE6: treaded as min-height*/
+
+        min-height:100%; /* real browsers */
+
+
+        div#content {
+            padding:1em 1em 29px;
+
+            #mainVideos {
+                width: 890px;
+            }
+
+            .video-item {
+                background-color: #f0f0f0;
+                border: 2px solid #d2d2d2;
+                padding: 10px;
+                border-radius: 20px;
+                display: block;
+                margin-bottom: 10px;
+
+                .videoDescription {
+                    span {
+                        display: block;
+                        i {
+                            color: grey;
+                            text-decoration: none;
+                            font-style: normal;
+                        }
+                    }
+                }
+            } 
+            
+            div.hr {
+                width: @column-width;
+                margin-left: -14px;
+                height: 38px;
+                text-align: center;
+                background-color: #d2d2d2;
+                display: block;
+                margin-bottom: 60px;
+                margin-top: 30px;
+                
+                h1 {
+                    font-family: Generica, sans-serif;
+                    font-size: 24px;
+                    display: inline-block;
+                    background-image: url("../images/biale-tlo-contentu.jpg");
+                    height: 100%;
+                    margin: 0;
+                    line-height: 38px;
+                    text-transform: uppercase;
+                    width: auto;
+                    padding: 0 50px;
+                }
+            }
+        }
+
+        div#footer {
+            background: #000000;
+            border-top: 5px solid #c80000;
+            height: 24px;
+            line-height: 24px;
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+div#about-polmedia,
+div#contact-content
+
+{
+    font-weight: bold;
+    line-height: 25px;
+    text-align: center;
+    margin: 0 100px;
+    
+    p {
+        margin-bottom: 2em;
+    }
+    
+}

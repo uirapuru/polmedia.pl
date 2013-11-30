@@ -3,19 +3,92 @@
     <head>
         <meta charset="UTF-8" />
         <title>Polmedia.pl - {% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        {% stylesheets
+            'bundles/polmedia/less/style.less'
+            'bundles/polmedia/css/bootstrap.css'
+        filter='less,cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="{{ path("main_page")}}">mainPage</a></li>
-                <li><a href="{{ path("categories")}}">categories</a></li>
-                <li><a href="{{ path("contact")}}">contact</a></li>
-                <li><a href="{{ path("static", {slug: "about"})}}">about company</a></li>
-            </ul>
-        </nav>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div id="top" class="column">
+            <nav>
+                <a href="{{ path("main_page") }}">
+                {% image '@PolmediaBundle/Resources/public/images/Logo-glowne.png' %}
+                    <img src="{{ asset_url }}" alt="Example" />
+                {% endimage %}
+                </a>
+
+                {% set route = app.request.attributes.get('_route') %}
+
+                <ul class="inline">
+                    <li class="{% if route == 'main_page' %}active{% endif %}"><a href="{{ path("main_page")}}">main page</a></li>
+                    <li class="{% if route == 'static' %}active{% endif %}"><a href="{{ path("static", {slug: "polmedia"})}}">polmedia</a></li>
+                    <li class="{% if route == 'categories' or route == 'video' or route=='category' %}active{% endif %}"><a href="{{ path("categories")}}">our catalog</a></li>
+                    <li class="{% if route == 'contact' %}active{% endif %}"><a href="{{ path("contact")}}">contact</a></li>
+                </ul>
+            </nav>
+            <div id="ui-bar"></div>
+        </div>
+        <div id="middle" class="column">
+            <div id="scroller" class="carousel slide">
+                <ol class="carousel-indicators">
+                    <li data-target="#scroller" data-slide-to="0" class="active"></li>
+                    <li data-target="#scroller" data-slide-to="1"></li>
+                    <li data-target="#scroller" data-slide-to="2"></li>
+                    <li data-target="#scroller" data-slide-to="3"></li>
+                </ol>
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item">
+                    {% image '@PolmediaBundle/Resources/public/images/baner-1.jpg' %}
+                        <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                    </div>
+                    <div class="item">
+                    {% image '@PolmediaBundle/Resources/public/images/baner-2.jpg' %}
+                        <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                    </div>
+                    <div class="item">
+                    {% image '@PolmediaBundle/Resources/public/images/baner-1.jpg' %}
+                        <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                    </div>
+                    <div class="item">
+                    {% image '@PolmediaBundle/Resources/public/images/baner-2.jpg' %}
+                        <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                    </div>
+                </div>
+                <!-- Carousel nav -->
+            </div>
+            <a class="carcontrol left" href="#scroller" data-slide="prev" id="scrollerLeft">
+            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-lewo.png' %}
+                <img src="{{ asset_url }}" alt="" />
+            {% endimage %}
+            </a>
+            <a class="carcontrol right" href="#scroller" data-slide="next" id="scrollerRight">
+            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-prawo.png' %}
+                <img src="{{ asset_url }}" alt="" />
+            {% endimage %}
+            </a>
+        </div>
+        <div id="container">
+            <div id="content" class="column">
+            {% block body %}{% endblock %}  
+            </div>
+            <div id="footer" class="column">{{ "now"|date("Y") }} POLMEDIA. All rights Reserved.</div>
+        </div>
+        
+        {% javascripts
+            '@PolmediaBundle/Resources/public/js/jquery-1.10.2.js'
+            '@PolmediaBundle/Resources/public/js/jquery-migrate-1.2.1.js'
+            '@PolmediaBundle/Resources/public/js/bootstrap.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </body>
 </html>

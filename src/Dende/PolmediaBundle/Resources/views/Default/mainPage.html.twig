@@ -1,9 +1,51 @@
 {% extends '::base.html.twig' %}
 
+
 {% block body %}
-<ul>
-{% for video in promotedVideos %}
-    <li>{{ video.getTitle() }}</li>
+
+<div id="mainVideos" class="container-fluid">
+{% for video in mainVideos %}
+    <div class="row-fluid video-item">
+        <div class="span2">
+            <img src="http://placehold.it/200x400px" />
+        </div>       
+        <div class="span4 videoDescription">
+            <strong>{{ video.getTitle() }}</strong>
+            <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
+            <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
+            <span><i>Cast:</i> {{ video.getCast() }}</span>
+            {{ video.getPlot() }}
+        </div>
+        <div class="span6">
+            <img src="http://placehold.it/400x200px" />
+        </div>
+    </div>
 {% endfor %}
-</ul>
+</div>
+
+<div class="container-fluid">
+{% for video in promotedVideos %}
+    {% if loop.index0 == 0 or loop.index0 is even  %}<div class="row-fluid">{% endif %}
+        <div class="span6 video-item">
+
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <img src="http://placehold.it/200x400px" />
+                    </div>       
+                    <div class="span8 videoDescription">
+                        <strong>{{ video.getTitle() }}</strong>
+                        <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
+                        <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
+                        <span><i>Cast:</i> {{ video.getCast() }}</span>
+                        {{ video.getPlot() }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% if loop.index0 is odd or loop.revindex0 == 0 %}</div>{% endif %}
+{% endfor %}
+</div>
+
 {% endblock %}

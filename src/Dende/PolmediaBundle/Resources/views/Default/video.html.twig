@@ -1,5 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-{{ dump(video) }}
+
+<div id="video">
+    <div id="video-pic">
+        <img src="http://placeholde.it/192x273" />
+    </div>
+
+    <div id="video-description">
+        <div id="video-details">
+            <h3>{{ video.getTitle() }}</h3>
+            <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
+            <span><i>Released:</i> {{ video.getProductionYear() }}</span>
+            <span><i>Cast:</i> {{ video.getCast() }}</span>
+            <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
+            <span><i>Runtime:</i> {{ video.getDuration() }}</span>
+            <span><i>Awards:</i> {{ video.getPrizes() }}</span>
+        </div>
+        <div id="video-plot">
+            <h3>Plot</h3>
+            <div>{{ video.getPlot() }}</div>
+        </div>
+    </div>
+    <div id="video-graphic">
+        <h3>Graphic materials</h3>
+        <ul class="thumbnails">
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+        </ul>
+    </div>
+</div>
+
+
+
 {% endblock %}

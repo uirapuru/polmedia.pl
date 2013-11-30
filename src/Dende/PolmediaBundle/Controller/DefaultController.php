@@ -18,9 +18,11 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function mainPageAction() {
+        $mainVideos = $this->get("video_repository")->getMainVideos();
         $promotedVideos = $this->get("video_repository")->getPromotedVideos();
 
         return array(
+            "mainVideos" => $mainVideos,
             "promotedVideos" => $promotedVideos
         );
     }
