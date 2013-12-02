@@ -11,3 +11,5 @@
 /bin/
 /composer.phar
 /nbproject/private/
+/web/css/
+/web/js/
