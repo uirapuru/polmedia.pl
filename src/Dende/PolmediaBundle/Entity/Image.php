@@ -44,10 +44,11 @@ class Image
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="video_id", type="integer")
+     * 
+     * @ORM\ManyToOne(targetEntity="Dende\PolmediaBundle\Entity\Video", inversedBy="images",cascade={"persist"})
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $videoId;
+    private $video;
 
 
     /**

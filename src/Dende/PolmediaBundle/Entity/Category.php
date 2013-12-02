@@ -10,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="categories")
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\CategoryRepository")
  */
-class Category
-{
+class Category {
+// <editor-fold defaultstate="collapsed" desc="fields">
+
     /**
      * @var integer
      *
@@ -35,14 +36,27 @@ class Category
      */
     private $orderNumber;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="category")
+     */
+    private $videos; // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getVideos() {
+        return $this->videos;
+    }
+
+    public function setVideos($videos) {
+        $this->videos = $videos;
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -52,10 +66,9 @@ class Category
      * @param string $title
      * @return Category
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -64,8 +77,7 @@ class Category
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -75,10 +87,9 @@ class Category
      * @param integer $orderNumber
      * @return Category
      */
-    public function setOrderNumber($orderNumber)
-    {
+    public function setOrderNumber($orderNumber) {
         $this->orderNumber = $orderNumber;
-    
+
         return $this;
     }
 
@@ -87,8 +98,9 @@ class Category
      *
      * @return integer 
      */
-    public function getOrderNumber()
-    {
+    public function getOrderNumber() {
         return $this->orderNumber;
     }
+
+// </editor-fold>
 }

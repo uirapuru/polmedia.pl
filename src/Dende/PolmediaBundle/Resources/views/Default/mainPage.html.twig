@@ -1,23 +1,25 @@
 {% extends '::base.html.twig' %}
 
-
 {% block body %}
 
 <div id="mainVideos" class="container-fluid">
 {% for video in mainVideos %}
     <div class="row-fluid video-item">
-        <div class="span2">
-            <img src="http://placehold.it/200x400px" />
+        <div id="video-pic" class="span2">
+            <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
+            <a id="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
+
+            <a href="{{ path("video", {id: video.getId()}) }}" class="videoLink"></a>
         </div>       
-        <div class="span4 videoDescription">
+        <div class="span3 videoDescription">
             <strong>{{ video.getTitle() }}</strong>
             <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
             <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
             <span><i>Cast:</i> {{ video.getCast() }}</span>
             {{ video.getPlot() }}
         </div>
-        <div class="span6">
-            <img src="http://placehold.it/400x200px" />
+        <div class="span7">
+            <div id="embedVideo" class="pull-right"><iframe width="410" height="250" src="//www.youtube.com/embed/{{ video.getYoutube() }}" frameborder="0" allowfullscreen></iframe></div>
         </div>
     </div>
 {% endfor %}
@@ -30,9 +32,11 @@
 
             <div class="container-fluid">
                 <div class="row-fluid">
-                    <div class="span4">
-                        <img src="http://placehold.it/200x400px" />
-                    </div>       
+                    <div id="video-pic" class="span4">
+                        <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
+                        <a id="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
+                        <a href="{{ path("video", {id: video.getId()}) }}" class="videoLink"></a>
+                    </div>      
                     <div class="span8 videoDescription">
                         <strong>{{ video.getTitle() }}</strong>
                         <span><i>Director:</i> {{ video.getDirectorsName() }}</span>

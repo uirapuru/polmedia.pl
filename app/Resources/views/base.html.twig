@@ -7,6 +7,7 @@
         {% stylesheets
             'bundles/polmedia/less/style.less'
             'bundles/polmedia/css/bootstrap.css'
+            'bundles/polmedia/css/prettyPhoto.css'
         filter='less,cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -87,7 +88,13 @@
             '@PolmediaBundle/Resources/public/js/jquery-1.10.2.js'
             '@PolmediaBundle/Resources/public/js/jquery-migrate-1.2.1.js'
             '@PolmediaBundle/Resources/public/js/bootstrap.js'
+            '@PolmediaBundle/Resources/public/js/jquery.prettyPhoto.js'
         %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts
+            '@PolmediaBundle/Resources/public/coffee/main.coffee'
+        filter="coffee" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     </body>

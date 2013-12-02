@@ -100,8 +100,29 @@ class Video {
      */
     private $category;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="video")
+     */
+    private $images;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="main_image_url", type="string", length=255)
+     */
+    private $mainImage;
+
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getMainImage() {
+        return $this->mainImage;
+    }
+
+    public function setMainImage($mainImage) {
+        $this->mainImage = $mainImage;
+    }
+
     public function getCategory() {
         return $this->category;
     }
@@ -327,6 +348,14 @@ class Video {
      */
     public function getIsMain() {
         return $this->isMain;
+    }
+
+    public function getImages() {
+        return $this->images;
+    }
+
+    public function setImages($images) {
+        $this->images = $images;
     }
 
 // </editor-fold>

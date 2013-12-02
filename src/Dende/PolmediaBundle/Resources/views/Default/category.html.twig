@@ -3,7 +3,9 @@
 {% block title %}{{ category.getTitle() }}{% endblock %}
 
 {% block body %}
-Videos for {{ category.getTitle() }}:
+<div class="hr">
+    <h1>{{ category.getTitle() }}</h1>
+</div>
 
 <ul>
 {% for video in videos %}

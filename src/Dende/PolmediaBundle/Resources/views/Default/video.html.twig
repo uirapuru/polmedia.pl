@@ -2,36 +2,37 @@
 
 {% block body %}
 
-<div id="video">
-    <div id="video-pic">
-        <img src="http://placeholde.it/192x273" />
+<div id="video" class="row-fluid">
+    {% block leftVideoImage %}
+    <div id="video-pic" class="span2">
+        <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
+        <a id="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
     </div>
+    {% endblock %}
 
-    <div id="video-description">
-        <div id="video-details">
-            <h3>{{ video.getTitle() }}</h3>
-            <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
-            <span><i>Released:</i> {{ video.getProductionYear() }}</span>
-            <span><i>Cast:</i> {{ video.getCast() }}</span>
-            <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
-            <span><i>Runtime:</i> {{ video.getDuration() }}</span>
-            <span><i>Awards:</i> {{ video.getPrizes() }}</span>
-        </div>
-        <div id="video-plot">
-            <h3>Plot</h3>
-            <div>{{ video.getPlot() }}</div>
+    <div id="video-description" class="span10">
+        <div class="row-fluid">
+            <div id="video-details" class="span6">
+                <h3>{{ video.getTitle() }}</h3>
+                <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
+                <span><i>Released:</i> {{ video.getProductionYear() }}</span>
+                <span><i>Cast:</i> {{ video.getCast() }}</span>
+                <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
+                <span><i>Runtime:</i> {{ video.getDuration() }}</span>
+                <span><i>Awards:</i> {{ video.getPrizes() }}</span>
+            </div>
+            <div id="video-plot" class="span6">
+                <h3>Plot</h3>
+                <div>{{ video.getPlot() }}</div>
+            </div>
         </div>
     </div>
-    <div id="video-graphic">
+    <div id="video-graphic" class="span10 pull-right">
         <h3>Graphic materials</h3>
         <ul class="thumbnails">
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
-            <li><a href="#" class="thumbnail"><img src="http://placehold.it/120x67" /></a></li>
+            {% for image in video.getImages() %}
+            <li><a href="/uploads/{{ image.getUrl() }}" rel="prettyPhoto[gallery]"><img src="/uploads/{{ image.getThumbnail() }}" /></a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>
