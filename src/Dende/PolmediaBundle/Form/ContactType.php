@@ -53,6 +53,7 @@ class ContactType extends AbstractType
                 new NotBlank(array('message' => 'Name should not be blank.')),
                 new Length(array('min' => 2))
             ),
+            'company' => array(),
             'email' => array(
                 new NotBlank(array('message' => 'Email should not be blank.')),
                 new Email(array('message' => 'Invalid email address.'))

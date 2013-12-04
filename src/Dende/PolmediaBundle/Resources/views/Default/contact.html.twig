@@ -9,7 +9,7 @@
 
 <div id="contact-content">
     <p>You can contact us by our mail information:</p>
-    
+
     <p>
         POLMEDIA<br />
         Nike 25<br />
@@ -17,11 +17,73 @@
         Tel. +48 22 863 34 11<br />
         polmedia@polmedia-film.com
     </p>
-    
+
     <p>Or you can fill our contact form:</p>
 </div>
 
- 
-{{ form_row(form) }}
+<form class="form-horizontal" method="POST" id="contactForm">
+    {{form_errors(form)}}
+    <div class="control-group{% if form.name.vars.errors|length %} error{%endif%}">
+        {{ form_label(form.name, 'Name:', {'label_attr' : {'class' : 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.name) }}
+            <div class="help-block">
+            {{form_errors(form.name)}}
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group{% if form.email.vars.errors|length %} error{%endif%}">
+        {{ form_label(form.email, 'Email:', {'label_attr' : {'class' : 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.email) }}
+            <div class="help-block">
+            {{form_errors(form.email)}}
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group{% if form.company.vars.errors|length %} error{%endif%}">
+        {{ form_label(form.company, 'Company:', {'label_attr' : {'class' : 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.company) }}
+            <div class="help-block">
+            {{form_errors(form.company)}}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="control-group{% if form.subject.vars.errors|length %} error{%endif%}">
+        {{ form_label(form.subject, 'Subject:', {'label_attr' : {'class' : 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.subject) }}
+            <div class="help-block">
+            {{form_errors(form.subject)}}
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group{% if form.message.vars.errors|length %} error{%endif%}">
+        {{ form_label(form.message, 'Message:', {'label_attr' : {'class' : 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.message) }}
+            <div class="help-block">
+            {{form_errors(form.message)}}
+            </div>
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn">Send</button>
+        </div>
+    </div>
+</form> 
+
+
+
 
 {% endblock %}

@@ -77,17 +77,18 @@ class DefaultController extends Controller {
                 $message = \Swift_Message::newInstance()
                         ->setSubject($form->get('subject')->getData())
                         ->setFrom($form->get('email')->getData())
-                        ->setTo('contact@example.com')
+                        ->setTo('uirapuruadg@gmail.com')
                         ->setBody(
                         $this->renderView(
-                                'PolmediaBundle:Mail:contact.html.twig', array(
+                                'PolmediaBundle:Default:_mail.html.twig', array(
                             'ip'      => $request->getClientIp(),
                             'name'    => $form->get('name')->getData(),
+                            'company'    => $form->get('company')->getData(),
                             'message' => $form->get('message')->getData()
                                 )
                         )
                 );
-
+                
                 $this->get('mailer')->send($message);
 
                 $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
