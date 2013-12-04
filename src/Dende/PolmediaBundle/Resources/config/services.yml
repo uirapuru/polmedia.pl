@@ -1,4 +1,12 @@
 parameters:
+    carousel_images:
+        - 'baner-1.jpg'
+        - 'baner-2.jpg'
+        - 'baner-1.jpg'
+        - 'baner-2.jpg'
+        - 'baner-1.jpg'
+        - 'baner-2.jpg'
+        
     video.class:                Dende\PolmediaBundle\Entity\Video
     video_repository.class:     Dende\PolmediaBundle\Entity\VideoRepository
     category.class:             Dende\PolmediaBundle\Entity\Category

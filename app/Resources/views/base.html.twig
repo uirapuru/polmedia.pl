@@ -4,13 +4,16 @@
         <meta charset="UTF-8" />
         <title>Polmedia.pl - {% block title %}Welcome!{% endblock %}</title>
 
+        {% block stylesheets %}
         {% stylesheets
             'bundles/polmedia/less/style.less'
+            'bundles/polmedia/less/video.less'
             'bundles/polmedia/css/bootstrap.css'
             'bundles/polmedia/css/prettyPhoto.css'
         filter='less,cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+        {% endblock stylesheets %}
 
     </head>
     <body>
@@ -34,48 +37,7 @@
             <div id="ui-bar"></div>
         </div>
         <div id="middle" class="column">
-            <div id="scroller" class="carousel slide">
-                <ol class="carousel-indicators">
-                    <li data-target="#scroller" data-slide-to="0" class="active"></li>
-                    <li data-target="#scroller" data-slide-to="1"></li>
-                    <li data-target="#scroller" data-slide-to="2"></li>
-                    <li data-target="#scroller" data-slide-to="3"></li>
-                </ol>
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-                    <div class="active item">
-                    {% image '@PolmediaBundle/Resources/public/images/baner-1.jpg' %}
-                        <img src="{{ asset_url }}" alt="" />
-                    {% endimage %}
-                    </div>
-                    <div class="item">
-                    {% image '@PolmediaBundle/Resources/public/images/baner-2.jpg' %}
-                        <img src="{{ asset_url }}" alt="" />
-                    {% endimage %}
-                    </div>
-                    <div class="item">
-                    {% image '@PolmediaBundle/Resources/public/images/baner-1.jpg' %}
-                        <img src="{{ asset_url }}" alt="" />
-                    {% endimage %}
-                    </div>
-                    <div class="item">
-                    {% image '@PolmediaBundle/Resources/public/images/baner-2.jpg' %}
-                        <img src="{{ asset_url }}" alt="" />
-                    {% endimage %}
-                    </div>
-                </div>
-                <!-- Carousel nav -->
-            </div>
-            <a class="carcontrol left" href="#scroller" data-slide="prev" id="scrollerLeft">
-            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-lewo.png' %}
-                <img src="{{ asset_url }}" alt="" />
-            {% endimage %}
-            </a>
-            <a class="carcontrol right" href="#scroller" data-slide="next" id="scrollerRight">
-            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-prawo.png' %}
-                <img src="{{ asset_url }}" alt="" />
-            {% endimage %}
-            </a>
+            {{ render(controller("PolmediaBundle:Default:carousel")) }}
         </div>
         <div id="container">
             <div id="content" class="column">
@@ -83,7 +45,7 @@
             </div>
             <div id="footer" class="column">{{ "now"|date("Y") }} POLMEDIA. All rights Reserved.</div>
         </div>
-        
+
         {% javascripts
             '@PolmediaBundle/Resources/public/js/jquery-1.10.2.js'
             '@PolmediaBundle/Resources/public/js/jquery-migrate-1.2.1.js'
@@ -97,5 +59,6 @@
         filter="coffee" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+        <div id="addon"></div>
     </body>
 </html>

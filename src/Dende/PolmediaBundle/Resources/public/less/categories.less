@@ -1,0 +1,61 @@
+@item-height : 216px;
+.title-link {
+    font-family: Generica, sans-serif;
+    font-size: 32px;
+    color: #212121;
+}
+
+ul#categoriesList {
+    li {
+        a {
+            display: inline-block;
+            width: 216px;
+            height: 32px;
+            line-height: 32px;
+            background-repeat: no-repeat;
+            background-position: top left;
+            background-color: transparent;
+            text-align: center;
+            padding-top: @item-height + 20px;
+            .title-link;
+        }
+        &#action a {
+            background-image: url("../images/categories/action-off.png");
+            &:hover {
+                background-image: url("../images/categories/action.png");
+            }
+        }
+        &#adventure a {
+            background-image: url("../images/categories/adventure-off.png");
+            &:hover {
+                background-image: url("../images/categories/adventure.png");
+            }
+        }
+        &#animation a {
+            background-image: url("../images/categories/animation-off.png");
+            &:hover {
+                background-image: url("../images/categories/animation.png");
+            }
+        }
+    }
+}
+
+ul#categoryList {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    li {
+        text-align: center;
+        a { 
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            padding: 5px 20px;
+            margin: 5px auto;
+            background-color: rgba(210,210,210,0.5);
+            .title-link;
+        }
+    }
+}

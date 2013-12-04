@@ -30,6 +30,13 @@ class Category {
     private $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="order_number", type="integer")
@@ -42,6 +49,14 @@ class Category {
     private $videos; // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public function setSlug($slug) {
+        $this->slug = $slug;
+    }
 
     public function getVideos() {
         return $this->videos;

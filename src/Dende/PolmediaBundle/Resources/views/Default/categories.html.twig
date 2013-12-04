@@ -2,14 +2,23 @@
 
 {% block title %}categories list{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+{% stylesheets
+    'bundles/polmedia/less/categories.less'
+filter='less,cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock stylesheets %}
+
 {% block body %}
 <div class="hr">
     <h1>Our Catalog</h1>
 </div>
 
-<ul>
+<ul id="categoriesList" class="row-fluid">
 {% for category in categories %}
-    <li><a href="{{ path("category", {id: category.getId()}) }}">{{ category.getTitle() }}</a></li>
+    <li id="{{ category.getSlug() }}" class="span4"><a href="{{ path("category", {id: category.getId()}) }}">{{ category.getTitle() }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

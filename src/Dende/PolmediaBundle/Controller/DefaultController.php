@@ -22,9 +22,17 @@ class DefaultController extends Controller {
         $promotedVideos = $this->get("video_repository")->getPromotedVideos();
 
         return array(
-            "mainVideos" => $mainVideos,
+            "mainVideos"     => $mainVideos,
             "promotedVideos" => $promotedVideos
         );
+    }
+
+    /**
+     * @Template()
+     */
+    public function carouselAction() {
+        $images = $this->container->getParameter('carousel_images');
+        return array("images" => $images);
     }
 
     /**

@@ -1,0 +1,124 @@
+.video-item {
+    &.short-video, &.main-video {
+        background-color: #f0f0f0;
+        border: 2px solid #d2d2d2;
+        padding: 10px;
+        border-radius: 20px;
+        display: block;
+        margin-bottom: 10px;
+    }
+} 
+
+.video-description {
+    h3 {
+        color: #212121;
+        font-family: Generica, sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        text-transform: uppercase;
+    }
+
+    .full-video & h3 {
+        border-bottom: 2px solid #d9d9d9;
+    }
+
+    span {
+        display: block;
+        color: #000000;
+        font-family: Georgia, sans-serif;
+        font-size: 14px;
+        text-align: justify;
+        i {
+            color: #a8a8a8;
+            font-family: Georgia, sans-serif;
+            font-size: 14px;
+            font-style: normal;
+        }
+    }
+}
+
+div.video-plot {
+    h3 {
+        font-weight: normal;
+        text-transform: uppercase;
+        border-bottom: 2px solid #d9d9d9;
+        color: #a8a8a8;
+        font-family: Georgia, sans-serif;
+        font-size: 14px;
+        font-style: normal;
+    }
+    display: block;
+    color: #000000;
+    font-family: Georgia, sans-serif;
+    font-size: 14px;
+    text-align: justify;
+    font-size: 12px;
+    border-left: 2px solid #d9d9d9;
+    padding-left: 10px;
+    min-height: 300px;
+    margin-left: 10px;
+}
+
+div.embedVideo {
+    padding: 15px 18px;
+    background-color: #d8dcdf;
+    display: block;
+    width: 410px;
+}
+
+div.video-pic {
+    text-align: center;
+
+    > a {
+        display: inline-block;
+    }
+
+    a.watchYoutube {
+        width: 143px;
+        height: 105px;
+        background: transparent url("../images/trailer-off.png") top left no-repeat;
+        margin-top: 35px;
+        &.null {
+            background: transparent url("../images/trailer-null.png") top left no-repeat;
+        }
+        &:hover {
+            background: transparent url("../images/trailer-on.png") top left no-repeat;
+        }
+    }
+    .main-video & a.watchYoutube,
+    .short-video & a.watchYoutube
+    {
+        margin-left: -5px;
+    }
+
+    .videoLink {
+        width: 73px;
+        height: 66px;
+        background: transparent url("../images/more-off.png") top left no-repeat;
+        margin-top: 35px;
+        &:hover {
+            background: transparent url("../images/more-on.png") top left no-repeat;
+        }
+    }
+
+}
+
+div.video-graphic {
+    h3 {
+        border-top: 2px solid #d9d9d9;
+        font-weight: normal;
+        color: #a8a8a8;
+        font-family: Georgia, sans-serif;
+        font-size: 14px;
+        font-style: normal;
+    }
+    img {
+        width: 120px;
+        height: 67px;
+    }
+}
+
+#mainVideos {
+    width: 890px;
+}
+

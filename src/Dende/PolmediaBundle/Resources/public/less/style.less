@@ -21,18 +21,16 @@
 @scroller-side-border: 17px;
 @scroller-indicators-height: 28px;
 
-.i-description {
-    color: #a8a8a8;
-    font-family: Georgia, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-}
-
-.text-description {
-    display: block;
-    color: #000000;
-    font-family: Georgia, sans-serif;
-    font-size: 14px;
+div#addon {
+    background: #000000;
+    border-top: 5px solid #c80000;
+    height: 24px;
+    line-height: 24px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: -10;
 }
 
 html,body {
@@ -87,7 +85,6 @@ html,body {
                 display: block;
                 background-color: @menu-bar-color;
                 height: @navbar-height;
-                line-height: @navbar-height;
                 position: absolute;
                 top: 50%;
                 margin-top: -1 * @navbar-height / 2;
@@ -98,16 +95,15 @@ html,body {
                 li {                   
                     padding-left: 23px;
                     padding-right: 23px;
-                    line-height: inherit;
                     a {
                         color: #d7d7d7;
                         text-transform: uppercase;
                         text-decoration: none;
                         font-family: Generica, sans-serif;
                         font-size: 19px;
-                        line-height: inherit;
+                        line-height: @navbar-height + 3px;
                     }
-                    &.active {
+                    &.active, &:hover {
                         a {
                             color: #e80000;
                         }
@@ -187,44 +183,30 @@ html,body {
         }
     }
 
+
     div#container {
+        width: @column-width;
         background-color: rgba(255,255,255,1);
         background-image: url("../images/biale-tlo-contentu.jpg");
-        position:relative; /* needed for footer positioning*/
         margin:0 auto; /* center, not in IE5 */
-        width: @column-width;
+        height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+        min-height: 100%; /* ie6 ignores min-height completely */
+        height: 100%;
+        position: relative;
 
-        height:auto !important; /* real browsers */
-        height:100%; /* IE6: treaded as min-height*/
-
-        min-height:100%; /* real browsers */
-
+        div#footer {
+            background: #000000;
+            border-top: 5px solid #c80000;
+            height: 24px;
+            line-height: 24px;
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
 
         div#content {
             padding:1em 1em 29px;
-
-            #mainVideos {
-                width: 890px;
-            }
-
-            .video-item {
-                background-color: #f0f0f0;
-                border: 2px solid #d2d2d2;
-                padding: 10px;
-                border-radius: 20px;
-                display: block;
-                margin-bottom: 10px;
-
-                .videoDescription {
-                    span {
-                        display: block;
-                        .text-description;
-                        i {
-                            .i-description;
-                        }
-                    }
-                }
-            } 
 
             div.hr {
                 width: @column-width;
@@ -249,125 +231,20 @@ html,body {
                     padding: 0 50px;
                 }
             }
-        }
 
-        div#footer {
-            background: #000000;
-            border-top: 5px solid #c80000;
-            height: 24px;
-            line-height: 24px;
-            bottom: 0;
-            position: absolute;
-            width: 100%;
-            text-align: center;
-        }
-    }
-}
+            div#about-polmedia,
+            div#contact-content
+            {
+                font-weight: bold;
+                line-height: 25px;
+                text-align: center;
+                margin: 0 100px;
 
-div#about-polmedia,
-div#contact-content
-
-{
-    font-weight: bold;
-    line-height: 25px;
-    text-align: center;
-    margin: 0 100px;
-
-    p {
-        margin-bottom: 2em;
-    }
-
-}
-
-div#video {
-    div#video-pic {
-        a#watchYoutube {
-            display: block;
-            width: 143px;
-            height: 105px;
-            background: transparent url("../images/trailer-off.png") top left no-repeat;
-            margin-top: 35px;
-            &.null {
-                background: transparent url("../images/trailer-null.png") top left no-repeat;
-            }
-            &:hover {
-                background: transparent url("../images/trailer-on.png") top left no-repeat;
-            }
-        }
-        img#mainImage {
-
-        }
-    }
-
-    div#video-description {
-        padding-bottom: 20px;
-        margin-bottom: 0px;
-        border-bottom: 2px solid #d9d9d9;
-
-        div#video-details {
-            h3 {
-                font-family: Generica, sans-serif;
-                font-size: 34px;
-                color: #000000;
-                display: block;
-                border-bottom: 2px solid #d9d9d9;
-            }
-            span {
-                display: block;
-                .text-description;
-                i {
-                    .i-description;
+                p {
+                    margin-bottom: 2em;
                 }
             }
         }
-        div#video-plot {
-            h3 {
-                font-weight: normal;
-                text-transform: uppercase;
-                border-bottom: 2px solid #d9d9d9;
-                .i-description;
-            }
-            .text-description;
-            font-size: 12px;
-            border-left: 2px solid #d9d9d9;
-            padding-left: 10px;
-            min-height: 300px;
-            margin-left: 10px;
-        }
-    }
-
-    div#video-graphic {
-        margin-top: -20px;
-        h3 {
-            font-weight: normal;
-            .i-description;
-        }
-        img {
-            width: 120px;
-            height: 67px;
-        }
     }
 }
 
-.videoLink {
-    display: block;
-    width: 73px;
-    height: 66px;
-    background: transparent url("../images/more-off.png") top left no-repeat;
-    margin-top: 35px;
-    margin-left: 30px;
-    &:hover {
-        background: transparent url("../images/more-on.png") top left no-repeat;
-    }
-}
-
-div#embedVideo {
-    padding: 15px 18px;
-    background-color: #d8dcdf;
-    display: block;
-    width: 410px;
-    
-    iframe{
-
-    }
-}

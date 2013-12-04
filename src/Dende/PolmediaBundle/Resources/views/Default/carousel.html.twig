@@ -1,0 +1,32 @@
+<div id="scroller" class="carousel slide">
+    <ol class="carousel-indicators">
+         {% for imageFile in images %}
+            <li data-target="#scroller" data-slide-to="{{ loop.index0 }}" class="{% if loop.index0 == 0 %}active {% endif %}"></li>
+        {% endfor %}
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        {% for file in images %}
+        <div class="{% if loop.index0 == 0 %}active {% endif %}item">
+            <img src="/bundles/polmedia/images/{{ asset(file) }}" alt="" />
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Carousel nav -->
+</div>
+
+{% spaceless %}
+<a class="carcontrol left" href="#scroller" data-slide="prev" id="scrollerLeft">
+            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-lewo.png' %}
+    <img src="{{ asset_url }}" alt="" />
+            {% endimage %}
+</a>
+{% endspaceless %}
+
+{% spaceless %}
+<a class="carcontrol right" href="#scroller" data-slide="next" id="scrollerRight">
+            {% image '@PolmediaBundle/Resources/public/images/strzalka-w-prawo.png' %}
+    <img src="{{ asset_url }}" alt="" />
+            {% endimage %}
+</a>
+{% endspaceless %}

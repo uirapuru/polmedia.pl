@@ -1,53 +1,17 @@
 {% extends '::base.html.twig' %}
+{% import 'PolmediaBundle:Default:_video.html.twig' as macro %}
 
 {% block body %}
-
 <div id="mainVideos" class="container-fluid">
 {% for video in mainVideos %}
-    <div class="row-fluid video-item">
-        <div id="video-pic" class="span2">
-            <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
-            <a id="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
-
-            <a href="{{ path("video", {id: video.getId()}) }}" class="videoLink"></a>
-        </div>       
-        <div class="span3 videoDescription">
-            <strong>{{ video.getTitle() }}</strong>
-            <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
-            <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
-            <span><i>Cast:</i> {{ video.getCast() }}</span>
-            {{ video.getPlot() }}
-        </div>
-        <div class="span7">
-            <div id="embedVideo" class="pull-right"><iframe width="410" height="250" src="//www.youtube.com/embed/{{ video.getYoutube() }}" frameborder="0" allowfullscreen></iframe></div>
-        </div>
-    </div>
+    {{ macro.mainVideo(video) }}
 {% endfor %}
 </div>
 
 <div class="container-fluid">
 {% for video in promotedVideos %}
     {% if loop.index0 == 0 or loop.index0 is even  %}<div class="row-fluid">{% endif %}
-        <div class="span6 video-item">
-
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div id="video-pic" class="span4">
-                        <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
-                        <a id="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
-                        <a href="{{ path("video", {id: video.getId()}) }}" class="videoLink"></a>
-                    </div>      
-                    <div class="span8 videoDescription">
-                        <strong>{{ video.getTitle() }}</strong>
-                        <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
-                        <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
-                        <span><i>Cast:</i> {{ video.getCast() }}</span>
-                        {{ video.getPlot() }}
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        {{ macro.shortVideo(video) }}
     {% if loop.index0 is odd or loop.revindex0 == 0 %}</div>{% endif %}
 {% endfor %}
 </div>
