@@ -5,6 +5,7 @@ set :app_path,    "app"
 
 set :repository,  "https://github.com/uirapuru/polmedia.pl.git"
 set :scm,         :git
+set :branch,      "master"
 
 set :model_manager, "doctrine"
 
