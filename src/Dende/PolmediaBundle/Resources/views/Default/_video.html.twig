@@ -2,7 +2,11 @@
 <div class="row-fluid video-item full-video">
     <div class="video-pic span2">
         <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
+        {% if video.getYoutube() %}
         <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
+        {% else %}
+        <img src="{{ asset("/bundles/polmedia/images/trailer-null.png") }}}" />
+        {%endif %}
     </div>
 
     <div class="video-description span5">
@@ -17,7 +21,7 @@
 
     <div class="video-plot span5">
         <h3>Plot</h3>
-        <span class="plot">{{ video.getPlot() }}</span>
+        <span class="plot">{{ video.getPlot()}}</span>
     </div>
 
     {% if video.getImages()|length > 0 %}
@@ -37,15 +41,15 @@
 <div class="row-fluid video-item main-video">
     <div class="video-pic span2">
         <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
-        <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
-        <a class="videoLink" href="{{ path("video", {id: video.getId()}) }}"></a>
+        {# <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a> #}
+        <a class="link-to-video" href="{{ path("video", {id: video.getId()}) }}"></a>
     </div>       
     <div class="span4 video-description">
         <h3>{{ video.getTitle() }}</h3>
         <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
         <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
         <span><i>Cast:</i> {{ video.getCast() }}</span>
-        <span class="plot">{{ video.getPlot() }}</span>
+        <span class="plot">{{ video.getPlot()|truncate(390) }}</span>
     </div>
     <div class="span6">
         <div class="embedVideo pull-right"><iframe width="410" height="250" src="//www.youtube.com/embed/{{ video.getYoutube() }}" frameborder="0" allowfullscreen></iframe></div>
@@ -57,10 +61,8 @@
 <div class="span6 row-fluid video-item short-video">
     <div class="video-pic span4">
         <img src="/uploads/{{ video.getMainImage() }}" id="mainImage"/>
-        {% if video.getYoutube() %}
-        <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
-        {% endif %}
-        <a href="{{ path("video", {id: video.getId()}) }}" class="videoLink"></a>
+        {# {% if video.getYoutube() %}<a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>{% endif %} #}
+        <a href="{{ path("video", {id: video.getId()}) }}" class="link-to-video"></a>
     </div>      
     <div class="span8 video-description">
         <h3>{{ video.getTitle() }}</h3>

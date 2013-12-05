@@ -21,18 +21,6 @@
 @scroller-side-border: 17px;
 @scroller-indicators-height: 28px;
 
-div#addon {
-    background: #000000;
-    border-top: 5px solid #c80000;
-    height: 24px;
-    line-height: 24px;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    z-index: -10;
-}
-
 html,body {
     font-family: Georgia, sans-serif;
     color: #000000;
@@ -183,6 +171,19 @@ html,body {
         }
     }
 
+    div#footer {
+        background: #000000;
+        border-top: 5px solid #c80000;
+        height: 24px;
+        line-height: 24px;
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0
+    }
 
     div#container {
         width: @column-width;
@@ -194,16 +195,6 @@ html,body {
         height: 100%;
         position: relative;
 
-        div#footer {
-            background: #000000;
-            border-top: 5px solid #c80000;
-            height: 24px;
-            line-height: 24px;
-            bottom: 0;
-            position: absolute;
-            width: 100%;
-            text-align: center;
-        }
 
         div#content {
             padding:1em 1em 29px;
@@ -251,15 +242,15 @@ html,body {
 form#contactForm {
     margin: 0 auto;
     width: 50%;
-    
+
     label {
         font-weight: bold
     }
-    
+
     textarea {
         width: 400px
     }
-    
+
     .help-block {
         ul {
             list-style: none;

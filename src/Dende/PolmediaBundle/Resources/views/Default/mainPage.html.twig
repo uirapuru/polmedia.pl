@@ -4,7 +4,11 @@
 {% block body %}
 <div id="mainVideos" class="container-fluid">
 {% for video in mainVideos %}
-    {{ macro.mainVideo(video) }}
+    {% if video.getYoutube() is not null %}
+        {{ macro.mainVideo(video) }}
+    {% else %}
+        {{ macro.shortVideo(video) }}
+    {% endif %}
 {% endfor %}
 </div>
 
