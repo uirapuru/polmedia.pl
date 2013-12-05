@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="images")
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\ImageRepository")
  */
-class Image
-{
+class Image {
+
     /**
      * @var integer
      *
@@ -50,14 +50,12 @@ class Image
      */
     private $video;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -67,10 +65,9 @@ class Image
      * @param string $url
      * @return Image
      */
-    public function setUrl($url)
-    {
+    public function setUrl($url) {
         $this->url = $url;
-    
+
         return $this;
     }
 
@@ -79,8 +76,7 @@ class Image
      *
      * @return string 
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
@@ -90,10 +86,9 @@ class Image
      * @param string $thumbnail
      * @return Image
      */
-    public function setThumbnail($thumbnail)
-    {
+    public function setThumbnail($thumbnail) {
         $this->thumbnail = $thumbnail;
-    
+
         return $this;
     }
 
@@ -102,8 +97,7 @@ class Image
      *
      * @return string 
      */
-    public function getThumbnail()
-    {
+    public function getThumbnail() {
         return $this->thumbnail;
     }
 
@@ -113,10 +107,9 @@ class Image
      * @param boolean $isMain
      * @return Image
      */
-    public function setIsMain($isMain)
-    {
+    public function setIsMain($isMain) {
         $this->isMain = $isMain;
-    
+
         return $this;
     }
 
@@ -125,8 +118,7 @@ class Image
      *
      * @return boolean 
      */
-    public function getIsMain()
-    {
+    public function getIsMain() {
         return $this->isMain;
     }
 
@@ -136,10 +128,9 @@ class Image
      * @param integer $videoId
      * @return Image
      */
-    public function setVideoId($videoId)
-    {
+    public function setVideoId($videoId) {
         $this->videoId = $videoId;
-    
+
         return $this;
     }
 
@@ -148,8 +139,16 @@ class Image
      *
      * @return integer 
      */
-    public function getVideoId()
-    {
+    public function getVideoId() {
         return $this->videoId;
     }
+
+    public function getVideo() {
+        return $this->video;
+    }
+
+    public function setVideo($video) {
+        $this->video = $video;
+    }
+
 }
