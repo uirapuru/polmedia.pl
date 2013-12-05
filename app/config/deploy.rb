@@ -28,3 +28,12 @@ set :use_set_permissions, true
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
+
+namespace :deploy do
+  desc "building assetic"
+  task :assetic_dump, :roles => :app do
+    run "cd #{latest_release} && #{php_bin} app/console assetic:dump"
+  end
+end
+
+after 'deploy:update_code', 'deploy:assetic_dump'
