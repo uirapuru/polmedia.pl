@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Polmedia.pl - {% block title %}Welcome!{% endblock %}</title>
+
+        {% block stylesheets %}
+        {% stylesheets
+            'bundles/polmedia/less/style.less'
+            'bundles/polmedia/less/admin.less'
+            'bundles/polmedia/css/bootstrap.css'
+        filter='less,cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% endblock stylesheets %}
+    
+    </head>
+    <body>
+        <div id="top" class="column">
+            <nav>
+                <a href="{{ path("main_page") }}">
+                {% image '@PolmediaBundle/Resources/public/images/Logo-glowne.png' %}
+                    <img src="{{ asset_url }}" alt="Example" />
+                {% endimage %}
+                </a>
+
+                {% set route = app.request.attributes.get('_route') %}
+
+                <ul class="inline">
+                    <li class="{% if route == 'admin_video' %}active{% endif %}"><a href="{{ path("admin_video")}}">filmy</a></li>
+                    <li class="{% if route == 'admin_image' %}active{% endif %}"><a href="{{ path("admin_video")}}">obrazy</a></li>
+                </ul>
+            </nav>
+            <div id="ui-bar"></div>
+        </div>
+        <div id="container">
+            <div id="content" class="column">
+            {% block body %}{% endblock %}  
+            </div>
+        </div>
+        
+        {% javascripts
+            '@PolmediaBundle/Resources/public/js/jquery-1.10.2.js'
+            '@PolmediaBundle/Resources/public/js/jquery-migrate-1.2.1.js'
+            '@PolmediaBundle/Resources/public/js/bootstrap.js'
+            '@PolmediaBundle/Resources/public/js/jquery.dataTables.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts
+            '@PolmediaBundle/Resources/public/coffee/admin.coffee'
+        filter="coffee" %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    </body>
+</html>

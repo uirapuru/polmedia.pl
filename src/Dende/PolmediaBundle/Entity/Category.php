@@ -118,4 +118,9 @@ class Category {
     }
 
 // </editor-fold>
+
+    public function __toString() {
+        return $this->getTitle();
+    }
+
 }

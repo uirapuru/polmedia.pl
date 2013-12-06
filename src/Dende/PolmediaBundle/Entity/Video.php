@@ -25,70 +25,70 @@ class Video {
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable = false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="directors_name", type="string", length=255)
+     * @ORM\Column(name="directors_name", type="string", length=255, nullable = true)
      */
     private $directorsName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="production_year", type="string", length=4)
+     * @ORM\Column(name="production_year", type="string", length=4, nullable = true)
      */
     private $productionYear;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cast", type="string", length=4000)
+     * @ORM\Column(name="cast", type="string", length=4000, nullable = true)
      */
     private $cast;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duration", type="string", length=4)
+     * @ORM\Column(name="duration", type="string", length=4, nullable = true)
      */
     private $duration;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prizes", type="string", length=4000)
+     * @ORM\Column(name="prizes", type="string", length=4000, nullable = true)
      */
     private $prizes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="plot", type="string", length=10000)
+     * @ORM\Column(name="plot", type="string", length=10000, nullable = false)
      */
     private $plot;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="youtube", type="string", length=255)
+     * @ORM\Column(name="youtube", type="string", length=255, nullable = true)
      */
     private $youtube;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_front", type="boolean")
+     * @ORM\Column(name="is_front", type="boolean", nullable = true)
      */
     private $isFront;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_main", type="boolean")
+     * @ORM\Column(name="is_main", type="boolean", nullable = true)
      */
     private $isMain;
 
@@ -109,10 +109,16 @@ class Video {
     /**
      * @var string
      *
-     * @ORM\Column(name="main_image_url", type="string", length=255)
+     * @ORM\Column(name="main_image_url", type="string", length=255, nullable = false)
      */
     private $mainImage;
 
+    /**
+     *
+     * @var Symfony\Component\HttpFoundation\File\UploadedFile 
+     */
+    public $imageFile;
+    
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
     public function getMainImage() {
@@ -359,4 +365,9 @@ class Video {
     }
 
 // </editor-fold>
+
+    public function __toString() {
+        return $this->getTitle();
+    }
+
 }

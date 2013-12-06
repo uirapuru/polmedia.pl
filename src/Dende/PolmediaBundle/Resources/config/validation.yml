@@ -1,0 +1,4 @@
+Dende\PolmediaBundle\Entity\Video:
+    properties:
+        mainImage:
+            - Image: ~

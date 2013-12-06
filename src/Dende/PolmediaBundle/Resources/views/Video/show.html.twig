@@ -1,0 +1,48 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+<img src="/uploads/{{ asset(entity.mainImage) }}" class="pull-right thumbnail"/>
+<h1>{{ entity.title }}</h1>
+
+<table class="record_properties table table-striped">
+    <tbody>
+        <tr>
+            <th>Reżyser</th>
+            <td>{{ entity.directorsName }}</td>
+        </tr>
+        <tr>
+            <th>Rok produkcji</th>
+            <td>{{ entity.productionYear }}</td>
+        </tr>
+        <tr>
+            <th>Obsada</th>
+            <td>{{ entity.cast }}</td>
+        </tr>
+        <tr>
+            <th>Czas trwania</th>
+            <td>{{ entity.duration }}</td>
+        </tr>
+        <tr>
+            <th>Nagrody</th>
+            <td>{{ entity.prizes }}</td>
+        </tr>
+        <tr>
+            <th>Fabuła</th>
+            <td>{{ entity.plot }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="btn-group">
+    <a href="{{ path('admin_video') }}" class="btn">
+        Back to the list
+    </a>
+
+    <a href="{{ path('admin_video_edit', { 'id': entity.id }) }}" class="btn">
+        Edit
+    </a>
+</div>
+<div class="pull-right">
+{{ form(delete_form) }}
+</div>
+{% endblock %}
