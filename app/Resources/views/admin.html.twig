@@ -18,7 +18,7 @@
     <body>
         <div id="top" class="column">
             <nav>
-                <a href="{{ path("main_page") }}">
+                <a href="{{ path("admin_main_page") }}">
                 {% image '@PolmediaBundle/Resources/public/images/Logo-glowne.png' %}
                     <img src="{{ asset_url }}" alt="Example" />
                 {% endimage %}
@@ -28,7 +28,8 @@
 
                 <ul class="inline">
                     <li class="{% if route == 'admin_video' %}active{% endif %}"><a href="{{ path("admin_video")}}">filmy</a></li>
-                    <li class="{% if route == 'admin_image' %}active{% endif %}"><a href="{{ path("admin_video")}}">obrazy</a></li>
+                    <li class="{% if route == 'admin_image' %}active{% endif %}"><a href="{{ path("admin_image")}}">obrazy</a></li>
+                    <li class="pull-right"><a href="/logout">wyloguj</a></li>
                 </ul>
             </nav>
             <div id="ui-bar"></div>

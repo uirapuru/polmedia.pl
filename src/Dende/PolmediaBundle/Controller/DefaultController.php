@@ -83,12 +83,12 @@ class DefaultController extends Controller {
                                 'PolmediaBundle:Default:_mail.html.twig', array(
                             'ip'      => $request->getClientIp(),
                             'name'    => $form->get('name')->getData(),
-                            'company'    => $form->get('company')->getData(),
+                            'company' => $form->get('company')->getData(),
                             'message' => $form->get('message')->getData()
                                 )
                         )
                 );
-                
+
                 $this->get('mailer')->send($message);
 
                 $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');

@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image {
 
+    public $imageFile;
+    public $thumbFile;
+
     /**
      * @var integer
      *
@@ -34,13 +37,6 @@ class Image {
      * @ORM\Column(name="thumbnail", type="string", length=255)
      */
     private $thumbnail;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_main", type="boolean")
-     */
-    private $isMain;
 
     /**
      * @var integer
@@ -99,27 +95,6 @@ class Image {
      */
     public function getThumbnail() {
         return $this->thumbnail;
-    }
-
-    /**
-     * Set isMain
-     *
-     * @param boolean $isMain
-     * @return Image
-     */
-    public function setIsMain($isMain) {
-        $this->isMain = $isMain;
-
-        return $this;
-    }
-
-    /**
-     * Get isMain
-     *
-     * @return boolean 
-     */
-    public function getIsMain() {
-        return $this->isMain;
     }
 
     /**

@@ -21,11 +21,7 @@ class AdminController extends Controller {
      * @Template()
      */
     public function mainPageAction() {
-        $videos = $this->get("video_repository")->getAllVideos();
-
-        return array(
-            "videos" => $videos
-        );
+        return array();
     }
 
 }

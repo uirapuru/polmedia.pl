@@ -1,0 +1,29 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+<h1>Image</h1>
+
+<table class="record_properties table table-striped">
+    <tbody>
+        <tr>
+            <th>Zdjęcie</th>
+            <td>
+                <a href="/uploads/{{ asset(entity.url) }}" rel="prettyPhoto"><img src="/uploads/{{ entity.thumbnail }}" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="btn-group">
+    <a href="{{ path('admin_image') }}" class="btn">
+        Back to the list
+    </a>
+
+    <a href="{{ path('admin_image_edit', { 'id': entity.id }) }}" class="btn">
+        Edit
+    </a>
+</div>
+<div class="pull-right">
+{{ form(delete_form) }}
+</div>
+{% endblock %}

@@ -7,27 +7,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Dende\PolmediaBundle\Entity\Video;
-use Dende\PolmediaBundle\Form\VideoType;
+use Dende\PolmediaBundle\Entity\Image;
+use Dende\PolmediaBundle\Form\ImageType;
 
 /**
- * Video controller.
+ * Image controller.
  *
- * @Route("/admin/video")
+ * @Route("/admin/image")
  */
-class VideoController extends Controller {
+class ImageController extends Controller {
 
     /**
-     * Lists all Video entities.
+     * Lists all Image entities.
      *
-     * @Route("/", name="admin_video")
+     * @Route("/", name="admin_image")
      * @Method("GET")
      * @Template()
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PolmediaBundle:Video')->findAll();
+        $entities = $em->getRepository('PolmediaBundle:Image')->findAll();
 
         return array(
             'entities' => $entities,
@@ -35,14 +35,14 @@ class VideoController extends Controller {
     }
 
     /**
-     * Creates a new Video entity.
+     * Creates a new Image entity.
      *
-     * @Route("/", name="admin_video_create")
+     * @Route("/", name="admin_image_create")
      * @Method("POST")
-     * @Template("PolmediaBundle:Video:new.html.twig")
+     * @Template("PolmediaBundle:Image:new.html.twig")
      */
     public function createAction(Request $request) {
-        $entity = new Video();
+        $entity = new Image();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -50,15 +50,19 @@ class VideoController extends Controller {
         {
             $em = $this->getDoctrine()->getManager();
 
-            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
+            $imageName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
+            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $imageName);
 
-            $entity->setMainImage($newName);
+            $thumbName = uniqid() . "." . $entity->thumbFile->getClientOriginalExtension();
+            $entity->thumbFile->move(__DIR__ . '/../../../../web/uploads', $thumbName);
+
+            $entity->setUrl($imageName);
+            $entity->setThumbnail($thumbName);
 
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_video_show', array(
+            return $this->redirect($this->generateUrl('admin_image_show', array(
                                 'id' => $entity->getId())));
         }
 
@@ -69,15 +73,15 @@ class VideoController extends Controller {
     }
 
     /**
-     * Creates a form to create a Video entity.
+     * Creates a form to create a Image entity.
      *
-     * @param Video $entity The entity
+     * @param Image $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Video $entity) {
-        $form = $this->createForm(new VideoType(), $entity, array(
-            'action' => $this->generateUrl('admin_video_create'),
+    private function createCreateForm(Image $entity) {
+        $form = $this->createForm(new ImageType(), $entity, array(
+            'action' => $this->generateUrl('admin_image_create'),
             'method' => 'POST',
         ));
 
@@ -87,14 +91,14 @@ class VideoController extends Controller {
     }
 
     /**
-     * Displays a form to create a new Video entity.
+     * Displays a form to create a new Image entity.
      *
-     * @Route("/new", name="admin_video_new")
+     * @Route("/new", name="admin_image_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction() {
-        $entity = new Video();
+        $entity = new Image();
         $form = $this->createCreateForm($entity);
 
         return array(
@@ -104,20 +108,20 @@ class VideoController extends Controller {
     }
 
     /**
-     * Finds and displays a Video entity.
+     * Finds and displays a Image entity.
      *
-     * @Route("/{id}", name="admin_video_show")
+     * @Route("/{id}", name="admin_image_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PolmediaBundle:Video')->find($id);
+        $entity = $em->getRepository('PolmediaBundle:Image')->find($id);
 
         if (!$entity)
         {
-            throw $this->createNotFoundException('Unable to find Video entity.');
+            throw $this->createNotFoundException('Unable to find Image entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -129,20 +133,20 @@ class VideoController extends Controller {
     }
 
     /**
-     * Displays a form to edit an existing Video entity.
+     * Displays a form to edit an existing Image entity.
      *
-     * @Route("/{id}/edit", name="admin_video_edit")
+     * @Route("/{id}/edit", name="admin_image_edit")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PolmediaBundle:Video')->find($id);
+        $entity = $em->getRepository('PolmediaBundle:Image')->find($id);
 
         if (!$entity)
         {
-            throw $this->createNotFoundException('Unable to find Video entity.');
+            throw $this->createNotFoundException('Unable to find Image entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -156,15 +160,15 @@ class VideoController extends Controller {
     }
 
     /**
-     * Creates a form to edit a Video entity.
+     * Creates a form to edit a Image entity.
      *
-     * @param Video $entity The entity
+     * @param Image $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Video $entity) {
-        $form = $this->createForm(new VideoType(), $entity, array(
-            'action' => $this->generateUrl('admin_video_update', array('id' => $entity->getId())),
+    private function createEditForm(Image $entity) {
+        $form = $this->createForm(new ImageType(), $entity, array(
+            'action' => $this->generateUrl('admin_image_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -174,20 +178,20 @@ class VideoController extends Controller {
     }
 
     /**
-     * Edits an existing Video entity.
+     * Edits an existing Image entity.
      *
-     * @Route("/{id}", name="admin_video_update")
+     * @Route("/{id}", name="admin_image_update")
      * @Method("PUT")
-     * @Template("PolmediaBundle:Video:edit.html.twig")
+     * @Template("PolmediaBundle:Image:edit.html.twig")
      */
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PolmediaBundle:Video')->find($id);
+        $entity = $em->getRepository('PolmediaBundle:Image')->find($id);
 
         if (!$entity)
         {
-            throw $this->createNotFoundException('Unable to find Video entity.');
+            throw $this->createNotFoundException('Unable to find Image entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -196,13 +200,18 @@ class VideoController extends Controller {
 
         if ($editForm->isValid())
         {
+            $imageName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
+            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $imageName);
 
-            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
+            $thumbName = uniqid() . "." . $entity->thumbFile->getClientOriginalExtension();
+            $entity->thumbFile->move(__DIR__ . '/../../../../web/uploads', $thumbName);
 
+            $entity->setUrl($imageName);
+            $entity->setThumbnail($thumbName);
+            
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_video_edit', array(
+            return $this->redirect($this->generateUrl('admin_image_edit', array(
                                 'id' => $id)));
         }
 
@@ -214,9 +223,9 @@ class VideoController extends Controller {
     }
 
     /**
-     * Deletes a Video entity.
+     * Deletes a Image entity.
      *
-     * @Route("/{id}", name="admin_video_delete")
+     * @Route("/{id}", name="admin_image_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id) {
@@ -226,22 +235,22 @@ class VideoController extends Controller {
         if ($form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PolmediaBundle:Video')->find($id);
+            $entity = $em->getRepository('PolmediaBundle:Image')->find($id);
 
             if (!$entity)
             {
-                throw $this->createNotFoundException('Unable to find Video entity.');
+                throw $this->createNotFoundException('Unable to find Image entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_video'));
+        return $this->redirect($this->generateUrl('admin_image'));
     }
 
     /**
-     * Creates a form to delete a Video entity by id.
+     * Creates a form to delete a Image entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -249,7 +258,7 @@ class VideoController extends Controller {
      */
     private function createDeleteForm($id) {
         return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('admin_video_delete', array(
+                        ->setAction($this->generateUrl('admin_image_delete', array(
                                     'id' => $id)))
                         ->setMethod('DELETE')
                         ->add('submit', 'submit', array('label' => 'Delete'))

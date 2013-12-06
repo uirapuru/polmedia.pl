@@ -1,0 +1,33 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+<table class="records_list table table-striped well" id="imagesAdminList">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th style="text-align: center">Url</th>
+            <th style="text-align: center">Miniatura</th>
+            <th style="text-align: right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('admin_image_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td style="text-align: center">{{ entity.url }}</td>
+            <td style="text-align: center">{{ entity.thumbnail }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('admin_image_show', { 'id': entity.id }) }}" class="btn">pokaż</a>
+                    <a href="{{ path('admin_image_edit', { 'id': entity.id }) }}" class="btn">edycja</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('admin_image_new') }}" class="btn">
+    Stwórz nowy
+</a>
+    {% endblock %}
