@@ -8,6 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class VideoType extends AbstractType {
 
+    protected $uploaderHelper;
+
+    public function __construct($uploaderHelper) {
+        $this->uploaderHelper = $uploaderHelper;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -24,7 +30,15 @@ class VideoType extends AbstractType {
                 ->add('youtube', null, array("label" => "Id filmu youtube"))
                 ->add('isFront', null, array("label" => "Wyświetl na stronie głównej"))
                 ->add('isMain', null, array("label" => "Wyświetl w nagłówku strony głównej"))
-                ->add('imageFile', "file", array("label" => "Obraz okładki"))
+                ->add('mainImage', "hidden")
+                ->add('imageFile', "file", array(
+                    "mapped" => false,
+                    "attr"   => array(
+                        "data-url" => $this->uploaderHelper->endpoint('gallery')
+                    ),
+                    "required" => false,
+                    "label"  => "Obraz okładki"
+                ))
                 ->add('category', null, array("label" => "Kategoria filmu"))
         ;
     }

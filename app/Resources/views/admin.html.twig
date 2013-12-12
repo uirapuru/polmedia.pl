@@ -13,38 +13,56 @@
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         {% endblock stylesheets %}
-    
+
     </head>
     <body>
         <div id="top" class="column">
             <nav>
                 <a href="{{ path("admin_main_page") }}">
                 {% image '@PolmediaBundle/Resources/public/images/Logo-glowne.png' %}
-                    <img src="{{ asset_url }}" alt="Example" />
+                    <img src="{{ asset_url }}" alt="Polmedia" />
                 {% endimage %}
                 </a>
 
-                {% set route = app.request.attributes.get('_route') %}
-
                 <ul class="inline">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                        {% set route = app.request.attributes.get('_route') %}
                     <li class="{% if route == 'admin_video' %}active{% endif %}"><a href="{{ path("admin_video")}}">filmy</a></li>
                     <li class="{% if route == 'admin_image' %}active{% endif %}"><a href="{{ path("admin_image")}}">obrazy</a></li>
-                    <li class="pull-right"><a href="/logout">wyloguj</a></li>
+                    <li class="pull-right">
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </li>
+
+                    {% endif %}
                 </ul>
             </nav>
             <div id="ui-bar"></div>
         </div>
         <div id="container">
             <div id="content" class="column">
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for key, message in messages %}
+                    <div class="alert flash-{{ type }}">
+                        {{ message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {% block body %}{% endblock %}  
             </div>
         </div>
-        
+
         {% javascripts
             '@PolmediaBundle/Resources/public/js/jquery-1.10.2.js'
             '@PolmediaBundle/Resources/public/js/jquery-migrate-1.2.1.js'
             '@PolmediaBundle/Resources/public/js/bootstrap.js'
             '@PolmediaBundle/Resources/public/js/jquery.dataTables.min.js'
+            '@PolmediaBundle/Resources/public/js/jquery.prettyPhoto.js'
+            '@PolmediaBundle/Resources/public/js/jquery.ui.widget.js'
+            '@PolmediaBundle/Resources/public/js/jquery.iframe-transport.js'
+            '@PolmediaBundle/Resources/public/js/jquery.fileupload.js'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

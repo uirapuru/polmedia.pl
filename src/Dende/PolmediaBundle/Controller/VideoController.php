@@ -50,10 +50,10 @@ class VideoController extends Controller {
         {
             $em = $this->getDoctrine()->getManager();
 
-            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
+//            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
+//            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
 
-            $entity->setMainImage($newName);
+//            $entity->setMainImage($newName);
 
             $em->persist($entity);
             $em->flush();
@@ -76,7 +76,9 @@ class VideoController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Video $entity) {
-        $form = $this->createForm(new VideoType(), $entity, array(
+        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
+        
+        $form = $this->createForm(new VideoType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_video_create'),
             'method' => 'POST',
         ));
@@ -163,9 +165,11 @@ class VideoController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(Video $entity) {
-        $form = $this->createForm(new VideoType(), $entity, array(
+        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
+        
+        $form = $this->createForm(new VideoType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_video_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -177,7 +181,7 @@ class VideoController extends Controller {
      * Edits an existing Video entity.
      *
      * @Route("/{id}", name="admin_video_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("PolmediaBundle:Video:edit.html.twig")
      */
     public function updateAction(Request $request, $id) {
@@ -196,10 +200,12 @@ class VideoController extends Controller {
 
         if ($editForm->isValid())
         {
+//            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
+//            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads/', $newName);
+//
+//            $entity->setMainImage($newName);
 
-            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
-
+            $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_video_edit', array(

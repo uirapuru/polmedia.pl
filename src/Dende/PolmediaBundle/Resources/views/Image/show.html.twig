@@ -6,9 +6,15 @@
 <table class="record_properties table table-striped">
     <tbody>
         <tr>
+            <th>Miniatura</th>
+            <td>
+                <img src="/uploads/gallery/{{ entity.thumbnail }}" style="width: 200px;" />
+            </td>
+        </tr>
+        <tr>
             <th>Zdjęcie</th>
             <td>
-                <a href="/uploads/{{ asset(entity.url) }}" rel="prettyPhoto"><img src="/uploads/{{ entity.thumbnail }}" /></a>
+                <a href="/uploads/gallery/{{ entity.url }}" rel="prettyPhoto"><img src="/uploads/gallery/{{ entity.url }}" style="width: 200px;"/></a>
             </td>
         </tr>
     </tbody>
@@ -16,11 +22,11 @@
 
 <div class="btn-group">
     <a href="{{ path('admin_image') }}" class="btn">
-        Back to the list
+        Powrót do listy
     </a>
 
     <a href="{{ path('admin_image_edit', { 'id': entity.id }) }}" class="btn">
-        Edit
+        Edycja
     </a>
 </div>
 <div class="pull-right">
