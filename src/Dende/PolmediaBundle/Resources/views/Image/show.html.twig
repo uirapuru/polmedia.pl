@@ -6,15 +6,9 @@
 <table class="record_properties table table-striped">
     <tbody>
         <tr>
-            <th>Miniatura</th>
-            <td>
-                <img src="/uploads/gallery/{{ entity.thumbnail }}" style="width: 200px;" />
-            </td>
-        </tr>
-        <tr>
             <th>Zdjęcie</th>
             <td>
-                <a href="/uploads/gallery/{{ entity.url }}" rel="prettyPhoto"><img src="/uploads/gallery/{{ entity.url }}" style="width: 200px;"/></a>
+                <a href="/uploads/imageMain/{{ entity.url }}" rel="prettyPhoto"><img src="/uploads/thumbnail/{{ entity.thumbnail }}" /></a>
             </td>
         </tr>
     </tbody>

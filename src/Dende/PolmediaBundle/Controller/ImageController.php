@@ -50,15 +50,6 @@ class ImageController extends Controller {
         {
             $em = $this->getDoctrine()->getManager();
 
-            $imageName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $imageName);
-
-            $thumbName = uniqid() . "." . $entity->thumbFile->getClientOriginalExtension();
-            $entity->thumbFile->move(__DIR__ . '/../../../../web/uploads', $thumbName);
-
-            $entity->setUrl($imageName);
-            $entity->setThumbnail($thumbName);
-
             $em->persist($entity);
             $em->flush();
 
@@ -80,7 +71,9 @@ class ImageController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Image $entity) {
-        $form = $this->createForm(new ImageType(), $entity, array(
+        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
+        
+        $form = $this->createForm(new ImageType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_image_create'),
             'method' => 'POST',
         ));
@@ -167,9 +160,11 @@ class ImageController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(Image $entity) {
-        $form = $this->createForm(new ImageType(), $entity, array(
+        $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
+        
+        $form = $this->createForm(new ImageType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_image_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -181,7 +176,7 @@ class ImageController extends Controller {
      * Edits an existing Image entity.
      *
      * @Route("/{id}", name="admin_image_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("PolmediaBundle:Image:edit.html.twig")
      */
     public function updateAction(Request $request, $id) {
@@ -200,15 +195,8 @@ class ImageController extends Controller {
 
         if ($editForm->isValid())
         {
-            $imageName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $imageName);
-
-            $thumbName = uniqid() . "." . $entity->thumbFile->getClientOriginalExtension();
-            $entity->thumbFile->move(__DIR__ . '/../../../../web/uploads', $thumbName);
-
-            $entity->setUrl($imageName);
-            $entity->setThumbnail($thumbName);
             
+            $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_image_edit', array(

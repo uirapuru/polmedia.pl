@@ -12,9 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image {
 
-    public $imageFile;
-    public $thumbFile;
-
     /**
      * @var integer
      *

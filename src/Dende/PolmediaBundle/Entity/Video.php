@@ -111,7 +111,7 @@ class Video {
      *
      * @ORM\Column(name="main_image_url", type="string", length=255, nullable = false)
      */
-    private $mainImage;
+    private $mainImage = "noMainImage.png";
     
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">

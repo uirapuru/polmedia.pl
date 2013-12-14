@@ -49,12 +49,6 @@ class VideoController extends Controller {
         if ($form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
-
-//            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-//            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads', $newName);
-
-//            $entity->setMainImage($newName);
-
             $em->persist($entity);
             $em->flush();
 

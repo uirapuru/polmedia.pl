@@ -34,7 +34,7 @@ class VideoType extends AbstractType {
                 ->add('imageFile', "file", array(
                     "mapped" => false,
                     "attr"   => array(
-                        "data-url" => $this->uploaderHelper->endpoint('gallery')
+                        "data-url" => $this->uploaderHelper->endpoint('mainImage')
                     ),
                     "required" => false,
                     "label"  => "Obraz okładki"
