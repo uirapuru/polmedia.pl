@@ -6,8 +6,6 @@
 {% for video in mainVideos %}
     {% if video.getYoutube() is not null %}
         {{ macro.mainVideo(video) }}
-    {% else %}
-        {{ macro.shortVideo(video) }}
     {% endif %}
 {% endfor %}
 </div>

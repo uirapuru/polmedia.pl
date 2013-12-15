@@ -15,17 +15,25 @@ use Doctrine\ORM\QueryBuilder;
 class VideoRepository extends EntityRepository {
 
     public function getPromotedVideos() {
-        return $this->createQueryBuilder("v")
-                        ->where("v.isFront = true")
-                        ->where("v.isMain = false")
-                        ->getQuery()
+        $qb = $this->createQueryBuilder("v");
+
+        $query = $qb->where($qb->expr()->andX(
+                                        $qb->expr()->eq("v.isMain", 1), $qb->expr()->eq("v.isFront", 0), $qb->expr()->isNull("v.youtube")
+                        ))
+                        ->orWhere($qb->expr()->andX(
+                                        $qb->expr()->eq("v.isMain", 0), $qb->expr()->eq("v.isFront", 1)
+                        ));
+        
+        return $query->getQuery()
                         ->execute();
+        
+        
     }
 
     public function getMainVideos() {
         return $this->createQueryBuilder("v")
-                        ->where("v.isFront = true")
-                        ->where("v.isMain = true")
+                        ->andWhere("v.isMain = true")
+                        ->andWhere("v.youtube is not null")
                         ->getQuery()
                         ->execute();
     }

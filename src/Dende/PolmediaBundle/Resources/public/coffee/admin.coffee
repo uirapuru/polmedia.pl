@@ -1,7 +1,8 @@
 $ ->
   $("#videosAdminList").dataTable()
   $("#imagesAdminList").dataTable()
-  $("a[rel^='prettyPhoto']").prettyPhoto
+  
+  $("a[rel*='prettyPhoto']").prettyPhoto
     social_tools: ''
     
   img = $("<img />").attr "src", $("input#dende_polmediabundle_video_mainImage").val()
