@@ -89,3 +89,7 @@ oneup_uploader:
             frontend: blueimp
         thumbnail:
             frontend: blueimp
+polmedia:
+    mainImageDir:           /uploads/mainImage/
+    thumbnailDir:           /uploads/thumbnail/
+    galleryDir:             /uploads/gallery/

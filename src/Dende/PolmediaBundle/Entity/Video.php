@@ -3,6 +3,7 @@
 namespace Dende\PolmediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dende\PolmediaBundle\Lib\Globals;
 
 /**
  * Video
@@ -116,7 +117,7 @@ class Video {
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
     public function getMainImage() {
-        return $this->mainImage;
+        return Globals::applyMainImageDir($this->mainImage);
     }
 
     public function setMainImage($mainImage) {

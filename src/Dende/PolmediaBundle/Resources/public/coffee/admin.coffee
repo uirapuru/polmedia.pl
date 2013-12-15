@@ -4,34 +4,42 @@ $ ->
   $("a[rel^='prettyPhoto']").prettyPhoto
     social_tools: ''
     
-  mainImg = $("<img />").attr("src","/uploads/mainImage/"+$("input#dende_polmediabundle_video_mainImage").val());
-  $("label[for='dende_polmediabundle_video_imageFile']").append(mainImg);
+  img = $("<img />").attr "src", $("input#dende_polmediabundle_video_mainImage").val()
+  $("#dende_polmediabundle_video_imageFile").parents("div.controls").find("div.help-block").html img
     
   $("#dende_polmediabundle_video_imageFile").fileupload
     limitMultiFileUploads: 1
     done: (e, data) ->
+      console.log "load"
       response = data.response().result
       responseJSON = $.parseJSON(response)
-      pathname = responseJSON.pathname
+      pathname = responseJSON.mainImage
       filename = responseJSON.filename
-      $("label[for='dende_polmediabundle_video_imageFile'] img").attr "src", pathname.replace "gallery","mainImage"
+      $("#dende_polmediabundle_video_imageFile").parents("div.controls").find("div.help-block img").attr "src", pathname
       $("input#dende_polmediabundle_video_mainImage").val filename
     fail: (e, data) ->
       alert "Error with upload"
       
-  img = $("<img />").attr("src","/uploads/thumbnail/"+$("#dende_polmediabundle_image_thumbnail").val());
-  $("label[for='dende_polmediabundle_image_image']").append(img);
+  img = $("<img />").attr "src", $("#dende_polmediabundle_image_thumbnail").val()
+  anchor = $("<a />").append(img).attr("href",$("#dende_polmediabundle_image_url").val()).attr("rel","prettyPhoto")
+  $("#dende_polmediabundle_image_image").parents("div.controls").find("div.help-block").html anchor
   
   $("#dende_polmediabundle_image_image").fileupload
     limitMultiFileUploads: 1
     done: (e, data) ->
       response = data.response().result
       responseJSON = $.parseJSON(response)
-      pathname = responseJSON.pathname
+      
       filename = responseJSON.filename
-      thumbnail = filename.replace "gallery","thumbnail"
-      $("label[for='dende_polmediabundle_image_image'] img").attr "src", pathname.replace "gallery","thumbnail"
+      pathname = responseJSON.pathname
+      thumbnail = responseJSON.thumbnail
+      
       $("input#dende_polmediabundle_image_url").val filename
-      $("input#dende_polmediabundle_image_thumbnail").val thumbnail
+      $("input#dende_polmediabundle_image_thumbnail").val filename
+      
+      parent = $("#dende_polmediabundle_image_image").parents("div.controls");
+      parent.find("div.help-block a").attr "href", pathname
+      parent.find("div.help-block img").attr "src", thumbnail
     fail: (e, data) ->
       alert "Error with upload"
+      

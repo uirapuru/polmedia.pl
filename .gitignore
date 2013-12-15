@@ -13,4 +13,10 @@
 /nbproject/private/
 /web/css/
 /web/js/
-/web/uploads/
+/web/uploads/gallery/*
+/web/uploads/mainImage/*
+/web/uploads/thumbnail/*
+!/web/uploads/gallery/.gitkeep
+!/web/uploads/mainImage/.gitkeep
+!/web/uploads/thumbnail/.gitkeep
+

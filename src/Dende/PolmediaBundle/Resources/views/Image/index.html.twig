@@ -7,7 +7,6 @@
             <th>Id</th>
             <th style="text-align: center">Film</th>
             <th style="text-align: center">Duże zdjęcie</th>
-            <th style="text-align: center">Miniatura</th>
             <th style="text-align: right">Actions</th>
         </tr>
     </thead>
@@ -15,9 +14,8 @@
         {% for entity in entities %}
         <tr>
             <td><a href="{{ path('admin_image_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td><a href="{{ path('admin_video_show', { 'id': entity.getVideo().id }) }}">{{ entity.getVideo().getTitle() }}</a></td>
-            <td style="text-align: center">{{ entity.url }}</td>
-            <td style="text-align: center">{{ entity.thumbnail }}</td>
+            <td>{% if entity.getVideo() is not null %}<a href="{{ path('admin_video_show', { 'id': entity.getVideo().id }) }}">{{ entity.getVideo().getTitle() }}</a>{%else%}brak{% endif %}</td>
+            <td>{{ entity.getUrl() }}</td>
             <td>
                 <div class="btn-group pull-right">
                     <a href="{{ path('admin_image_show', { 'id': entity.id }) }}" class="btn">pokaż</a>

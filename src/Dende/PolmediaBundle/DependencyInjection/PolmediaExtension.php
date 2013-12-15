@@ -22,6 +22,10 @@ class PolmediaExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('polmedia.mainImageDir', $config['mainImageDir']); 
+        $container->setParameter('polmedia.thumbnailDir', $config['thumbnailDir']); 
+        $container->setParameter('polmedia.galleryDir', $config['galleryDir']); 
+        
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

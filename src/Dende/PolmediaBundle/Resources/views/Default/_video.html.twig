@@ -1,7 +1,7 @@
 {% macro fullVideo(video) %}
 <div class="row-fluid video-item full-video">
     <div class="video-pic span2">
-        <img src="/uploads/mainImage/{{ video.getMainImage() }}" id="mainImage"/>
+        <img src="{{ video.getMainImage() }}" id="mainImage"/>
         {% if video.getYoutube() %}
         <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
         {% else %}
@@ -29,7 +29,7 @@
         <h3>Graphic materials</h3>
         <ul class="thumbnails">
             {% for image in video.getImages() %}
-            <li><a href="/uploads/gallery/{{ image.getUrl() }}" rel="prettyPhoto[gallery]"><img src="/uploads/thumbnail/{{ image.getThumbnail() }}" /></a></li>
+            <li><a href="{{ image.getUrl() }}" rel="prettyPhoto[gallery]"><img src="{{ image.getThumbnail() }}" /></a></li>
             {% endfor %}
         </ul>
     </div>
@@ -41,7 +41,7 @@
 {% macro mainVideo(video) %}
 <div class="row-fluid video-item main-video">
     <div class="video-pic span2">
-        <img src="/uploads/mainImage/{{ video.getMainImage() }}" id="mainImage"/>
+        <img src="{{ video.getMainImage() }}" id="mainImage"/>
         {# <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a> #}
         <a class="link-to-video" href="{{ path("video", {id: video.getId()}) }}"></a>
     </div>       
@@ -61,7 +61,7 @@
 {% macro shortVideo(video) %}
 <div class="span6 row-fluid video-item short-video">
     <div class="video-pic span4">
-        <img src="/uploads/mainImage/{{ video.getMainImage() }}" id="mainImage"/>
+        <img src="{{ video.getMainImage() }}" id="mainImage"/>
         {# {% if video.getYoutube() %}<a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>{% endif %} #}
         <a href="{{ path("video", {id: video.getId()}) }}" class="link-to-video"></a>
     </div>      

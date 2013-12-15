@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Dende\PolmediaBundle\Entity\VideoRepository;
 
 class VideoRepositoryTest extends WebTestCase {
+// <editor-fold defaultstate="collapsed" desc="fields">
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -15,18 +16,37 @@ class VideoRepositoryTest extends WebTestCase {
     /**
      * @var Dende\PolmediaBundle\Entity\VideoRepository
      */
-    private $repository;
+    private $repository; // </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="setup">
 
     protected function setUp() {
         parent::setUp();
 
         static::$kernel = static::createKernel();
         static::$kernel->boot();
+
         $this->em = static::$kernel->getContainer()
                 ->get('doctrine')
                 ->getManager();
         $this->repository = $this->em->getRepository("PolmediaBundle:Video");
+
+        $this->memberManager = static::$kernel->getContainer()->get("member_manager");
+
+        $this->loader = new Loader;
+        $this->loader->loadFromDirectory(__DIR__ . '/../../../DataFixtures/ORM');
+
+        $purger = new ORMPurger($this->em);
+        $executor = new ORMExecutor($this->em, $purger);
+        $executor->execute($this->loader->getFixtures());
     }
+
+    protected function tearDown() {
+        parent::tearDown();
+        $this->em->close();
+    }
+
+// </editor-fold>
 
     public function testGetPromotedIndex() {
         $result = $this->repository->getPromotedVideos();

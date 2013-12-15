@@ -8,7 +8,7 @@
         <tr>
             <th>Zdjęcie</th>
             <td>
-                <a href="/uploads/imageMain/{{ entity.url }}" rel="prettyPhoto"><img src="/uploads/thumbnail/{{ entity.thumbnail }}" /></a>
+                <a href="{{ entity.getUrl() }}" rel="prettyPhoto"><img src="{{ entity.getThumbnail() }}" /></a>
             </td>
         </tr>
     </tbody>

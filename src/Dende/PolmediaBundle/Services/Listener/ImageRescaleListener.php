@@ -3,6 +3,7 @@
 namespace Dende\PolmediaBundle\Services\Listener;
 
 use Oneup\UploaderBundle\Event\PostPersistEvent;
+use Dende\PolmediaBundle\Lib\Globals;
 
 class ImageRescaleListener {
 
@@ -11,21 +12,22 @@ class ImageRescaleListener {
     }
 
     public function onUpload(PostPersistEvent $event) {
-        $filename = $event->getFile()->getPathname();
+        $filepath = $event->getFile()->getPathname();
         switch ($event->getType()) {
             case "mainImage":
-                $image = new \Imagick($filename);
+                $image = new \Imagick($filepath);
                 $image->scaleImage(125, 200, true);
-                $image->writeImage($filename);
+                $image->writeImage($filepath);
                 break;
             case "gallery":
-                $image = new \Imagick($filename);
+                $image = new \Imagick($filepath);
                 $image->scaleImage(1024, 768, true);
-                $image->writeImage($filename);
+                $image->writeImage($filepath);
                                 
-                $thumbnail = new \Imagick($filename);
+                $thumbnail = new \Imagick($filepath);
                 $thumbnail->scaleImage(200, 200, true);
-                $thumbnail->writeImage(str_replace("/gallery/", "/thumbnail/", $filename));
+                $thumbnailFilename = Globals::convertGalleryPathToThumbnailPath($filepath);
+                $thumbnail->writeImage($thumbnailFilename);
                 break;
         }
     }

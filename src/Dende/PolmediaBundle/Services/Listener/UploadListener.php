@@ -2,6 +2,7 @@
 namespace Dende\PolmediaBundle\Services\Listener;
 
 use Oneup\UploaderBundle\Event\PostPersistEvent;
+use Dende\PolmediaBundle\Lib\Globals;
 
 class UploadListener
 {
@@ -13,8 +14,12 @@ class UploadListener
     public function onUpload(PostPersistEvent $event)
     {
             $filename = $event->getFile()->getFilename();
+        
             $response = $event->getResponse();
-            $response["pathname"] = "/uploads/gallery/".$filename;
             $response["filename"] = $filename;
+            $response["pathname"] = Globals::applyGalleryDir($filename);
+            $response["thumbnail"] = Globals::applyThumbnailDir($filename);
+            $response["mainImage"] = Globals::applyMainImageDir($filename);
+            
     }
 }

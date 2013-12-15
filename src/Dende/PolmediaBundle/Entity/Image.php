@@ -3,6 +3,7 @@
 namespace Dende\PolmediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dende\PolmediaBundle\Lib\Globals;
 
 /**
  * Image
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\ImageRepository")
  */
 class Image {
+    // <editor-fold defaultstate="collapsed" desc="fields">
 
     /**
      * @var integer
@@ -41,7 +43,9 @@ class Image {
      * @ORM\ManyToOne(targetEntity="Dende\PolmediaBundle\Entity\Video", inversedBy="images",cascade={"persist"})
      * @ORM\JoinColumn(name="video_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $video;
+    private $video; // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     /**
      * Get id
@@ -70,7 +74,7 @@ class Image {
      * @return string 
      */
     public function getUrl() {
-        return $this->url;
+        return Globals::applyGalleryDir($this->url);
     }
 
     /**
@@ -91,7 +95,7 @@ class Image {
      * @return string 
      */
     public function getThumbnail() {
-        return $this->thumbnail;
+        return Globals::applyThumbnailDir($this->thumbnail);
     }
 
     /**
@@ -123,4 +127,5 @@ class Image {
         $this->video = $video;
     }
 
+// </editor-fold>
 }

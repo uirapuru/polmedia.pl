@@ -17,7 +17,7 @@ textarea[id*='plot'] {
     height: 200px;
 }
 
-label[for*='imageFile'] {
+div.controls {
     img {
         display: block;
         width: 200px;
@@ -26,11 +26,15 @@ label[for*='imageFile'] {
     }
 }
 
-label[for='dende_polmediabundle_image_image'] {
-    img {
-        display: block;
-        width: 200px;
-        max-height: 200px;
-        margin: 10px;
+#imagesAdminList_paginate,
+#videosAdminList_paginate
+{
+    display: block;
+    height: 1em;
+    width: 200px;
+    float: right;   
+    
+    a {
+        margin: 0 10px;
     }
 }
