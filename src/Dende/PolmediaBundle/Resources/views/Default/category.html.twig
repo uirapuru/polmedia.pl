@@ -18,7 +18,7 @@ filter='less,cssrewrite' %}
 
 <ul id="categoryList">
 {% for video in videos %}
-    <li><a href="{{ path("video",{id : video.getId()}) }}">{{ video.getTitle() }}</a></li>
+    <li><a href="{{ path("video",{id : video.getId()}) }}">{{ video.getTitle()|truncate(60) }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
