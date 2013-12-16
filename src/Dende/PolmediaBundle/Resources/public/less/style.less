@@ -198,6 +198,8 @@ html,body {
 
         div#content {
             padding:1em 1em 29px;
+            overflow: hidden;
+            max-width: @column-width;
 
             div.hr {
                 width: @column-width;
@@ -256,4 +258,12 @@ form#contactForm {
             list-style: none;
         }
     }
+}
+
+.table td {
+    word-break: break-all
+}
+
+.content h1 {
+    word-break: break-all
 }
