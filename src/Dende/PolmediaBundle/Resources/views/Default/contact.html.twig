@@ -21,6 +21,26 @@
     <p>Or you can fill our contact form:</p>
 </div>
 
+<div class="row-fluid">
+{% if app.session.flashbag.has('success') %}
+    <div class="alert alert-success span6 offset3">
+        <strong>Sukces!</strong><br />
+{% for flashMessage in app.session.flashbag.get('success') %}
+        {{ flashMessage }}<br />
+{% endfor %}
+    </div>
+{% endif %}
+
+{% if app.session.flashbag.has('warning')|length > 0 %}
+    <div class="alert alert-error span6 offset3">
+        <strong>Błąd!</strong><br />
+{% for flashMessage in app.session.flashbag.get('warning') %}
+        {{ flashMessage }}<br />
+{% endfor %}
+    </div>
+{% endif %}
+</div>
+
 <form class="form-horizontal" method="POST" id="contactForm">
     {{form_errors(form)}}
     <div class="control-group{% if form.name.vars.errors|length %} error{%endif%}">

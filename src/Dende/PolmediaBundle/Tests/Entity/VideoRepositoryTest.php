@@ -4,6 +4,9 @@ namespace Dende\PolmediaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Dende\PolmediaBundle\Entity\VideoRepository;
+use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 
 class VideoRepositoryTest extends WebTestCase {
 // <editor-fold defaultstate="collapsed" desc="fields">
@@ -21,20 +24,17 @@ class VideoRepositoryTest extends WebTestCase {
 // <editor-fold defaultstate="collapsed" desc="setup">
 
     protected function setUp() {
-        parent::setUp();
-
         static::$kernel = static::createKernel();
         static::$kernel->boot();
 
         $this->em = static::$kernel->getContainer()
                 ->get('doctrine')
                 ->getManager();
+
         $this->repository = $this->em->getRepository("PolmediaBundle:Video");
 
-        $this->memberManager = static::$kernel->getContainer()->get("member_manager");
-
         $this->loader = new Loader;
-        $this->loader->loadFromDirectory(__DIR__ . '/../../../DataFixtures/ORM');
+        $this->loader->loadFromDirectory(__DIR__ . '/../../DataFixtures/ORM');
 
         $purger = new ORMPurger($this->em);
         $executor = new ORMExecutor($this->em, $purger);
@@ -42,8 +42,8 @@ class VideoRepositoryTest extends WebTestCase {
     }
 
     protected function tearDown() {
-        parent::tearDown();
-        $this->em->close();
+//        parent::tearDown();
+//        $this->em->close();
     }
 
 // </editor-fold>

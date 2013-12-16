@@ -91,9 +91,13 @@ class DefaultController extends Controller {
 
                 $this->get('mailer')->send($message);
 
-                $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
+                $request->getSession()->getFlashBag()->add('success', 'Wiadomość wysłana, dziękujemy!');
 
                 return $this->redirect($this->generateUrl('contact'));
+            }
+            else
+            {
+                $request->getSession()->getFlashBag()->add('warning', 'Sprawdź, czy wszystkie pola wypełnione poprawnie.');
             }
         }
 
