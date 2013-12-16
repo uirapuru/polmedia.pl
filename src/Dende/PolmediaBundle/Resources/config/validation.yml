@@ -1,0 +1,53 @@
+Dende\PolmediaBundle\Entity\Video:
+    properties:
+        title:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 120
+                minMessage: "Pole musi mieć conajmniej {{ limit }} znaków"
+                maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
+        directorsName:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 120
+                minMessage: "Pole musi mieć conajmniej {{ limit }} znaków"
+                maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
+        productionYear:
+            - NotBlank: ~
+            - Range:
+                min: 1850
+                max: 2020
+                minMessage: "Pole musi mieć wartość conajmniej {{ limit }} rok"
+                maxMessage: "Pole może mieć wartość najwyżej {{ limit }} rok"
+                invalidMessage: "Musisz podać liczbę z zakresu 1850 - 2020"
+        duration:
+            - NotBlank: ~
+            - Range:
+                min: 0
+                max: 500
+                minMessage: "Pole musi mieć wartość conajmniej 1"
+                maxMessage: "Pole może mieć wartość najwyżej {{ limit }} minut"
+                invalidMessage: "Musisz podać liczbę z zakresu 1 - 500"
+        prizes:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 120
+                minMessage: "Pole musi mieć conajmniej {{ limit }} znaków"
+                maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
+        cast:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 120
+                minMessage: "Pole musi mieć conajmniej {{ limit }} znaków"
+                maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
+        plot:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 400
+                minMessage: "Pole może mieć najwyżej {{ limit }} znaków"
+                maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
