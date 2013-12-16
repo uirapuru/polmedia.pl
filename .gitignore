@@ -17,6 +17,8 @@
 /web/uploads/mainImage/*
 /web/uploads/thumbnail/*
 !/web/uploads/gallery/.gitkeep
+!/web/uploads/gallery/a.jpg
 !/web/uploads/mainImage/.gitkeep
+!/web/uploads/mainImage/front.jpg
 !/web/uploads/thumbnail/.gitkeep
-
+!/web/uploads/thumbnail/b.jpg
