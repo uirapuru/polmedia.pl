@@ -22,7 +22,12 @@ class VideoRepository extends EntityRepository {
                         ))
                         ->orWhere($qb->expr()->andX(
                                         $qb->expr()->eq("v.isMain", 0), $qb->expr()->eq("v.isFront", 1)
-                        ));
+                        ))
+                        ->orWhere($qb->expr()->andX(
+                                        $qb->expr()->eq("v.isMain", 1), $qb->expr()->eq("v.isFront", 1), $qb->expr()->isNull("v.youtube")
+                        ))
+                
+                ;
         
         return $query->getQuery()
                         ->execute();
