@@ -70,7 +70,7 @@
         <span><i>Director:</i> {{ video.getDirectorsName() }}</span>
         <span><i>Genre:</i> {{ video.getCategory().getTitle() }}</span>
         <span><i>Cast:</i> {{ video.getCast() }}</span>
-        <span class="plot">{{ video.getPlot() }}</span>
+        <span class="plot">{{ video.getPlot()|truncate(390) }}</span>
     </div>
 </div>
 {% endmacro shortVideo %}
