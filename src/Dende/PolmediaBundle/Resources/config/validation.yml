@@ -48,6 +48,6 @@ Dende\PolmediaBundle\Entity\Video:
             - NotBlank: ~
             - Length:
                 min: 2
-                max: 400
+                max: 1000
                 minMessage: "Pole może mieć najwyżej {{ limit }} znaków"
                 maxMessage: "Pole może mieć najwyżej {{ limit }} znaków"
