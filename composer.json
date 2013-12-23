@@ -4,7 +4,7 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": {"": "src/"}
     },
     "require": {
         "php": ">=5.3.3",
@@ -21,7 +21,8 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "oneup/uploader-bundle": "1.0.*@dev"
+        "oneup/uploader-bundle": "1.0.*@dev",
+        "stof/doctrine-extensions-bundle": "~1.1@dev"
     },
     "scripts": {
         "post-install-cmd": [

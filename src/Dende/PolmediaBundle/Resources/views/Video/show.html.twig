@@ -1,7 +1,9 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-<img src="{{ entity.getMainImage() }}" class="pull-right thumbnail"/>
+{% block body %}
+<a href="{{ entity.getMainImage() }}" rel="prettyPhoto">
+    <img src="{{ entity.getThumbnail() }}" class="pull-right thumbnail"/>
+</a>
 <h1>{{ entity.title }}</h1>
 
 <table class="record_properties table table-striped">

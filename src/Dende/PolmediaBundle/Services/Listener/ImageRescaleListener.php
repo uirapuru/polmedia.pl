@@ -16,14 +16,19 @@ class ImageRescaleListener {
         switch ($event->getType()) {
             case "mainImage":
                 $image = new \Imagick($filepath);
-                $image->scaleImage(125, 200, true);
+                $image->scaleImage(1024, 768, true);
                 $image->writeImage($filepath);
+
+                $image->scaleImage(200, 200, true);
+                $thumbnailFilename = Globals::convertMainPathToThumbnailPath($filepath);
+                $image->writeImage($thumbnailFilename);
+
                 break;
             case "gallery":
                 $image = new \Imagick($filepath);
                 $image->scaleImage(1024, 768, true);
                 $image->writeImage($filepath);
-                                
+
                 $thumbnail = new \Imagick($filepath);
                 $thumbnail->scaleImage(200, 200, true);
                 $thumbnailFilename = Globals::convertGalleryPathToThumbnailPath($filepath);

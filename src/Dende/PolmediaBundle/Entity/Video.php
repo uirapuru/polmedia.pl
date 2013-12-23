@@ -4,12 +4,14 @@ namespace Dende\PolmediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dende\PolmediaBundle\Lib\Globals;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Video
  *
  * @ORM\Table(name="videos")
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\VideoRepository")
+ * ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class Video {
 
@@ -113,9 +115,85 @@ class Video {
      * @ORM\Column(name="main_image_url", type="string", length=255, nullable = false)
      */
     private $mainImage = "noMainImage.png";
-    
+
+    /**
+     * @var integer 
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="video_order", type="integer", nullable = true)
+     */
+    private $order;
+
+    /**
+     * @var string
+     * @Gedmo\Slug(fields={"title"}, updatable=true, separator="-", unique=true)
+     * @ORM\Column(name="title_slug", type="string", nullable=false)
+     */
+    private $titleSlug;
+
+    /**
+     * @var DateTime $created
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var DateTime $modified
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     */
+    private $modified;
+
+    /**
+     * @var Datetime $deletedAt
+     *
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getTitleSlug() {
+        return $this->titleSlug;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getModified() {
+        return $this->modified;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setTitleSlug($titleSlug) {
+        $this->titleSlug = $titleSlug;
+    }
+
+    public function setCreated(DateTime $created) {
+        $this->created = $created;
+    }
+
+    public function setModified(DateTime $modified) {
+        $this->modified = $modified;
+    }
+
+    public function setDeletedAt(Datetime $deletedAt) {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function getOrder() {
+        return $this->order;
+    }
+
+    public function setOrder($order) {
+        $this->order = $order;
+    }
+
     public function getMainImage() {
         return Globals::applyMainImageDir($this->mainImage);
     }
@@ -307,6 +385,10 @@ class Video {
      */
     public function getYoutube() {
         return $this->youtube;
+    }
+
+    public function getThumbnail() {
+        return Globals::convertMainPathToThumbnailPath($this->getMainImage());
     }
 
     /**

@@ -4,6 +4,8 @@ namespace Dende\PolmediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dende\PolmediaBundle\Lib\Globals;
+use Gedmo\Mapping\Annotation as Gedmo;
+use \DateTime;
 
 /**
  * Image
@@ -43,9 +45,55 @@ class Image {
      * @ORM\ManyToOne(targetEntity="Dende\PolmediaBundle\Entity\Video", inversedBy="images",cascade={"persist"})
      * @ORM\JoinColumn(name="video_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $video; // </editor-fold>
+    private $video;
 
+    /**
+     * @var DateTime $created
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var DateTime $modified
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     */
+    private $modified;
+
+    /**
+     * @var Datetime $deletedAt
+     *
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getModified() {
+        return $this->modified;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setCreated(DateTime $created) {
+        $this->created = $created;
+    }
+
+    public function setModified(DateTime $modified) {
+        $this->modified = $modified;
+    }
+
+    public function setDeletedAt(Datetime $deletedAt) {
+        $this->deletedAt = $deletedAt;
+    }
 
     /**
      * Get id

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b73bd31f7e9b81149adef17451711590",
+    "hash": "dfc1ea84c8b49913aba828a0ca16e150",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -736,12 +736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "945eebb625073c51072b721ec528f12199b34915"
+                "reference": "6596b9d754b6cb094e10470967ed7b51e2aa9e12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/945eebb625073c51072b721ec528f12199b34915",
-                "reference": "945eebb625073c51072b721ec528f12199b34915",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6596b9d754b6cb094e10470967ed7b51e2aa9e12",
+                "reference": "6596b9d754b6cb094e10470967ed7b51e2aa9e12",
                 "shasum": ""
             },
             "require": {
@@ -796,7 +796,87 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-12-10 16:13:14"
+            "time": "2013-12-16 16:36:36"
+        },
+        {
+            "name": "gedmo/doctrine-extensions",
+            "version": "v2.3.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+                "reference": "d2bef940268e4dc5f0f050e80458169a7267813a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/d2bef940268e4dc5f0f050e80458169a7267813a",
+                "reference": "d2bef940268e4dc5f0f050e80458169a7267813a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.2,<2.5-dev",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.4.0-RC3",
+                "doctrine/dbal": ">=2.4.0-RC1",
+                "doctrine/mongodb": ">=1.0.3",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA9",
+                "doctrine/orm": ">=2.4.0-RC1",
+                "symfony/yaml": "2.3.1"
+            },
+            "suggest": {
+                "doctrine/dbal": ">=2.3.2",
+                "doctrine/mongodb": ">=1.0.1",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA7",
+                "doctrine/orm": ">=2.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Gedmo\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Buchmann",
+                    "email": "david@liip.ch"
+                },
+                {
+                    "name": "Gediminas Morkevicius",
+                    "email": "gediminas.morkevicius@gmail.com"
+                },
+                {
+                    "name": "Gustavo Falco",
+                    "email": "comfortablynumb84@gmail.com"
+                }
+            ],
+            "description": "Doctrine2 behavioral extensions",
+            "homepage": "http://gediminasm.org/",
+            "keywords": [
+                "Blameable",
+                "behaviors",
+                "doctrine2",
+                "extensions",
+                "gedmo",
+                "loggable",
+                "nestedset",
+                "sluggable",
+                "sortable",
+                "timestampable",
+                "translatable",
+                "tree",
+                "uploadable"
+            ],
+            "time": "2013-11-09 21:23:13"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1284,6 +1364,68 @@
             "time": "2013-08-21 18:09:35"
         },
         {
+            "name": "stof/doctrine-extensions-bundle",
+            "version": "dev-master",
+            "target-dir": "Stof/DoctrineExtensionsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
+                "reference": "9da4489322c5442ff021c4cd3f28dd79b2a8df07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/9da4489322c5442ff021c4cd3f28dd79b2a8df07",
+                "reference": "9da4489322c5442ff021c4cd3f28dd79b2a8df07",
+                "shasum": ""
+            },
+            "require": {
+                "gedmo/doctrine-extensions": "~2.3.1",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "to use the ORM extensions",
+                "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stof\\DoctrineExtensionsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
+            "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+            "keywords": [
+                "behaviors",
+                "doctrine2",
+                "extensions",
+                "gedmo",
+                "loggable",
+                "nestedset",
+                "sluggable",
+                "sortable",
+                "timestampable",
+                "translatable",
+                "tree"
+            ],
+            "time": "2013-10-13 16:27:31"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.0.3",
             "source": {
@@ -1558,16 +1700,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.7",
+            "version": "v2.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2829b471871c2564228fe9f0832a0f928a8ffaa1"
+                "reference": "b0b421908d569e5024372ded65857707c409e0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2829b471871c2564228fe9f0832a0f928a8ffaa1",
-                "reference": "2829b471871c2564228fe9f0832a0f928a8ffaa1",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/b0b421908d569e5024372ded65857707c409e0f7",
+                "reference": "b0b421908d569e5024372ded65857707c409e0f7",
                 "shasum": ""
             },
             "require": {
@@ -1662,7 +1804,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-11-14 07:58:51"
+            "time": "2013-12-16 14:36:05"
         },
         {
             "name": "twig/extensions",
@@ -1771,7 +1913,8 @@
     "stability-flags": {
         "doctrine/doctrine-fixtures-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "oneup/uploader-bundle": 20
+        "oneup/uploader-bundle": 20,
+        "stof/doctrine-extensions-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

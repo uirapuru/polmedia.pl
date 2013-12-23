@@ -70,4 +70,12 @@ class Globals {
     public static function convertGalleryPathToThumbnailPath($string) {
         return str_replace(self::getGalleryDir(), self::getThumbnailDir(), $string);
     }
+    /**
+     * 
+     * @param type $string
+     * @return type
+     */
+    public static function convertMainPathToThumbnailPath($string) {
+        return str_replace(self::getMainImageDir(), self::getThumbnailDir(), $string);
+    }
 }

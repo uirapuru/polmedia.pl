@@ -24,18 +24,27 @@ services:
         factory_method:         getRepository
         arguments:              [ "%category.class%" ]
     twig.extension.text:
-     class: Twig_Extensions_Extension_Text
-     tags:
-         - { name: twig.extension }
-         
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
     dende.upload_listener:
         class: Dende\PolmediaBundle\Services\Listener\UploadListener
         arguments: [@doctrine]
         tags:
             - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
-
     dende.image_rescale_listener:
         class: Dende\PolmediaBundle\Services\Listener\ImageRescaleListener
         arguments: [@doctrine]
         tags:
             - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
+#    dende.update_orders_listener:
+#        class: Dende\PolmediaBundle\EventListener\UpdateOrders
+#        tags:
+#            - { name: doctrine.event_listener, event: postFlush, connection: default }
+
+    gedmo.listener.softdeleteable:
+      class: Gedmo\SoftDeleteable\SoftDeleteableListener
+      tags:
+          - { name: doctrine.event_subscriber, connection: default }
+      calls:
+          - [ setAnnotationReader, [ @annotation_reader ] ]

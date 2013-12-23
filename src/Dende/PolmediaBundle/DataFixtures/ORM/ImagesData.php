@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Dende\PolmediaBundle\Entity\Image;
+use DateTime;
 
 class ImagesData extends AbstractFixture implements OrderedFixtureInterface {
 

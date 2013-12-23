@@ -2,6 +2,17 @@ $ ->
   $("#videosAdminList").dataTable()
   $("#imagesAdminList").dataTable()
   
+  $(document).on "click", "span.saveOrder", (e) ->
+    console.log "order changed"
+    $input = $(this).siblings "input"
+    value = parseInt $($input).val()
+    url = $($input).attr("data-order-url").replace "orderNumber", value
+
+    $.post url, (response) ->
+      window.location.reload()
+    
+    e.preventDefault()
+    
   $("a[rel*='prettyPhoto']").prettyPhoto
     social_tools: ''
     

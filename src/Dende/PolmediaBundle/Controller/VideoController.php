@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Dende\PolmediaBundle\Entity\Video;
 use Dende\PolmediaBundle\Form\VideoType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Video controller.
@@ -26,12 +27,23 @@ class VideoController extends Controller {
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('PolmediaBundle:Video')->findAll();
-
+        $entities = $em->getRepository('PolmediaBundle:Video')->getAllVideos();
         return array(
             'entities' => $entities,
         );
+    }
+
+    /**
+     * @Route("/{id}/update-order/{order}", name="admin_video_updateOrder")
+     * @ParamConverter("Video", class="PolmediaBundle:Video")
+     * @Method("POST")
+     */
+    public function updateOrderAction(Video $video, $order) {
+        $em = $this->getDoctrine()->getManager();
+        $video->setOrder($order);
+        $em->persist($video);
+        $em->flush();
+        return new \Symfony\Component\HttpFoundation\Response("ok", 200);
     }
 
     /**
@@ -71,7 +83,7 @@ class VideoController extends Controller {
      */
     private function createCreateForm(Video $entity) {
         $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
-        
+
         $form = $this->createForm(new VideoType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_video_create'),
             'method' => 'POST',
@@ -160,7 +172,7 @@ class VideoController extends Controller {
      */
     private function createEditForm(Video $entity) {
         $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
-        
+
         $form = $this->createForm(new VideoType($uploaderHelper), $entity, array(
             'action' => $this->generateUrl('admin_video_update', array('id' => $entity->getId())),
             'method' => 'POST',
@@ -194,11 +206,6 @@ class VideoController extends Controller {
 
         if ($editForm->isValid())
         {
-//            $newName = uniqid() . "." . $entity->imageFile->getClientOriginalExtension();
-//            $entity->imageFile->move(__DIR__ . '/../../../../web/uploads/', $newName);
-//
-//            $entity->setMainImage($newName);
-
             $em->persist($entity);
             $em->flush();
 
