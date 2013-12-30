@@ -32,14 +32,14 @@
     .full-video & h3 {
         border-bottom: 2px solid #d9d9d9;
     }
-   
+
     span {
         display: block;
         color: #000000;
         font-family: Georgia, sans-serif;
         font-size: 14px;
         text-align: justify;
-        word-break: break-all;
+        word-break: normal;
         i {
             color: #a8a8a8;
             font-family: Georgia, sans-serif;
@@ -60,7 +60,7 @@ div.video-plot {
         font-style: normal;
         letter-spacing: normal;
     }
-    
+
     display: block;
     color: #000000;
     font-family: Georgia, sans-serif;
@@ -116,10 +116,23 @@ div.video-pic {
         }
     }
 
-    div.full-video & a img#mainImage {
-        width: 191px;
-    }
-    
+
+}
+div.full-video div.video-pic a img.mainImage {
+    // width: 191px;
+    width: 100%;
+}
+
+div.short-video div.video-pic a img.mainImage {
+    width: 100%;
+    //width: 125px;
+    //max-height: 177px;
+}
+
+div.main-video div.video-pic a img.mainImage {
+    width: 100%;
+//    width: 192px;
+ //   max-height: 272px;
 }
 
 div.video-graphic {

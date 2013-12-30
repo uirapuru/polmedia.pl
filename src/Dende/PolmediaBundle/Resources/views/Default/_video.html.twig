@@ -1,7 +1,7 @@
 {% macro fullVideo(video) %}
 <div class="row-fluid video-item full-video">
     <div class="video-pic span3">
-        <a rel="prettyPhoto" href="{{ video.getMainImage() }}"><img src="{{ video.getThumbnail() }}" id="mainImage"/></a>
+        <a rel="prettyPhoto" href="{{ video.getMainImage() }}"><img src="{{ video.getThumbnail() }}" class="mainImage"/></a>
         {% if video.getYoutube() %}
         <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a>
         {% else %}
@@ -41,7 +41,7 @@
 {% macro mainVideo(video) %}
 <div class="row-fluid video-item main-video">
     <div class="video-pic span2">
-        <img src="{{ video.getMainImage() }}" id="mainImage"/>
+        <a rel="prettyPhoto" href="{{ video.getMainImage() }}"><img src="{{ video.getThumbnail() }}" class="mainImage"/></a>
         {# <a class="watchYoutube" href="http://youtube.com/watch?v={{ video.getYoutube() }}" rel="prettyPhoto"></a> #}
         <a class="link-to-video" href="{{ path("video", {id: video.getId()}) }}"></a>
     </div>       
@@ -61,7 +61,7 @@
 {% macro shortVideo(video) %}
 <div class="span6 row-fluid video-item short-video">
     <div class="video-pic span4">
-        <img src="{{ video.getMainImage() }}" id="mainImage"/>
+        <a rel="prettyPhoto" href="{{ video.getMainImage() }}"><img src="{{ video.getThumbnail() }}" class="mainImage"/></a>
         <a href="{{ path("video", {id: video.getId()}) }}" class="link-to-video"></a>
     </div>      
     <div class="span8 video-description">
