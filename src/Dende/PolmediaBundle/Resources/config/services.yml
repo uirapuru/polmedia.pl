@@ -37,10 +37,12 @@ services:
         arguments: [@doctrine]
         tags:
             - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
-#    dende.update_orders_listener:
-#        class: Dende\PolmediaBundle\EventListener\UpdateOrders
-#        tags:
-#            - { name: doctrine.event_listener, event: postFlush, connection: default }
+
+    dende.update_orders_subscriber:
+        class:          Dende\PolmediaBundle\Services\Subscriber\UpdateOrderSubscriber
+        arguments:      ["@service_container"]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
 
     gedmo.listener.softdeleteable:
       class: Gedmo\SoftDeleteable\SoftDeleteableListener

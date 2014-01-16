@@ -118,7 +118,6 @@ class Video {
 
     /**
      * @var integer 
-     * @Gedmo\SortablePosition
      * @ORM\Column(name="video_order", type="integer", nullable = true)
      */
     private $order;

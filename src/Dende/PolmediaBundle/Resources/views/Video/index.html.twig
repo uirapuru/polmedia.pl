@@ -22,7 +22,8 @@
             <td class="mainColumn">{% if entity.isMain == 1 %}<i class="icon-ok">1</i>{% endif %}</td>
             <td class="orderColumn">
                 <div class="input-append">
-                    <input type="text" 
+                    <input type="text"
+                           autocomplete="off"
                            value="{{ entity.getOrder() }}"
                            class="orderInput"
                            data-video-id="{{ entity.getId() }}"
