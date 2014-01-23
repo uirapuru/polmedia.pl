@@ -15,34 +15,30 @@ use Gedmo\Sortable\Entity\Repository\SortableRepository;
  */
 class VideoRepository extends EntityRepository {
 
-    public function getPromotedVideos() {
+    public function getFrontVideos() {
         $qb = $this->createQueryBuilder("v");
 
-        $query = $qb->where($qb->expr()->andX(
-                                $qb->expr()->eq("v.isMain", 1), $qb->expr()->eq("v.isFront", 0), $qb->expr()->isNull("v.youtube")
+        $query = $qb->where("v.type = :header AND v.youtube is null")
+                ->orWhere("v.type = :type")
+                ->setParameters(array(
+                    "type"   => Video::TYPE_FRONT,
+                    "header" => Video::TYPE_HEADER
                 ))
-                ->orWhere($qb->expr()->andX(
-                                $qb->expr()->eq("v.isMain", 0), $qb->expr()->eq("v.isFront", 1)
-                ))
-                ->orWhere($qb->expr()->andX(
-                                $qb->expr()->eq("v.isMain", 1), $qb->expr()->eq("v.isFront", 1), $qb->expr()->isNull("v.youtube")
-                ))
-                ->orderBy("v.order","ASC")
+                ->orderBy("v.order", "ASC")
 
         ;
 
         return $query->getQuery()
-                        ->setMaxResults(5)
                         ->execute();
     }
 
-    public function getMainVideos() {
+    public function getHeaderVideos() {
         return $this->createQueryBuilder("v")
-                        ->andWhere("v.isMain = true")
+                        ->where("v.type = :type")
                         ->andWhere("v.youtube is not null")
-                        ->orderBy("v.order","ASC")
+                        ->orderBy("v.order", "ASC")
+                        ->setParameter("type", Video::TYPE_HEADER)
                         ->getQuery()
-                        ->setMaxResults(1)
                         ->execute();
     }
 
@@ -55,7 +51,7 @@ class VideoRepository extends EntityRepository {
                 "category" => $category
             ));
         }
-        $query->orderBy("v.order","ASC");
+        $query->orderBy("v.order", "ASC");
         return $query->getQuery()->execute();
     }
 

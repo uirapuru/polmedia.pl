@@ -7,8 +7,8 @@
         <tr>
             <th>Tytuł</th>
             <th>Opis</th>
-            <th style="text-align: center">Główna</th>
             <th style="text-align: center">Nagłówek</th>
+            <th style="text-align: center">Główna</th>
             <th style="text-align: center">Kolejność</th>
             <th style="text-align: right">Actions</th>
         </tr>
@@ -18,9 +18,10 @@
         <tr>
             <td>{{ entity.title }}</td>
             <td>{{ entity.plot|truncate(30) }}</td>
-            <td class="frontColumn">{% if entity.isFront == 1 %}<i class="icon-ok">1</i>{% endif %}</td>
-            <td class="mainColumn">{% if entity.isMain == 1 %}<i class="icon-ok">1</i>{% endif %}</td>
+            <td class="mainColumn">{% if entity.type is constant("TYPE_HEADER",entity) %}<i class="icon-ok">1</i>{% endif %}</td>
+            <td class="frontColumn">{% if entity.type is constant("TYPE_FRONT",entity) %}<i class="icon-ok">1</i>{% endif %}</td>
             <td class="orderColumn">
+                {% if entity.type is constant("TYPE_HEADER",entity) or entity.type is constant("TYPE_FRONT",entity) %}
                 <div class="input-append">
                     <input type="text"
                            autocomplete="off"
@@ -33,6 +34,9 @@
                     </span>
                 </div>
                 <div class="hide-text">{{ entity.getOrder() }}</div>
+                {% else %}
+                <div class="hide-text">99999999</div>
+                {% endif %}
             </td>
             <td>
                 <div class="btn-group pull-right">

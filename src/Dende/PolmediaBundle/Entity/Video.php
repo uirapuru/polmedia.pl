@@ -6,14 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Dende\PolmediaBundle\Lib\Globals;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
+
 /**
  * Video
  *
  * @ORM\Table(name="videos")
  * @ORM\Entity(repositoryClass="Dende\PolmediaBundle\Entity\VideoRepository")
- * ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class Video {
+
+    const TYPE_HEADER = 'header';
+    const TYPE_FRONT = 'front';
+    const TYPE_NONE = null;
 
     // <editor-fold defaultstate="collapsed" desc="fields">
     /**
@@ -82,18 +86,10 @@ class Video {
     private $youtube;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_front", type="boolean", nullable = true)
+     * @var string
+     * @ORM\Column(type="string", columnDefinition="enum('header','front')", name="video_type", type="string", nullable = true)
      */
-    private $isFront;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_main", type="boolean", nullable = true)
-     */
-    private $isMain;
+    private $type;
 
     /**
      * @var integer
@@ -390,54 +386,24 @@ class Video {
         return Globals::convertMainPathToThumbnailPath($this->getMainImage());
     }
 
-    /**
-     * Set isFront
-     *
-     * @param boolean $isFront
-     * @return Video
-     */
-    public function setIsFront($isFront) {
-        $this->isFront = $isFront;
-
-        return $this;
-    }
-
-    /**
-     * Get isFront
-     *
-     * @return boolean 
-     */
-    public function getIsFront() {
-        return $this->isFront;
-    }
-
-    /**
-     * Set isMain
-     *
-     * @param boolean $isMain
-     * @return Video
-     */
-    public function setIsMain($isMain) {
-        $this->isMain = $isMain;
-
-        return $this;
-    }
-
-    /**
-     * Get isMain
-     *
-     * @return boolean 
-     */
-    public function getIsMain() {
-        return $this->isMain;
-    }
-
     public function getImages() {
         return $this->images;
     }
 
     public function setImages($images) {
         $this->images = $images;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setType($type) {
+        if (!in_array($type, array(self::TYPE_HEADER, self::TYPE_FRONT, self::TYPE_NONE)))
+        {
+            throw new \InvalidArgumentException("Invalid type");
+        }
+        $this->type = $type;
     }
 
 // </editor-fold>

@@ -36,35 +36,45 @@ class UpdateOrderSubscriber implements EventSubscriber {
     public function preFlush(PreFlushEventArgs $args) {
         $this->index($args);
     }
+
     public function postFlush(PostFlushEventArgs $args) {
-        $this->index($args);
+        $this->index1($args);
+        $this->index2($args);
     }
 
-    public function index($args) {
+    public function index1($args) {
+       
         $entityManager = $args->getEntityManager();
-        $sql = "update videos, (select id, @rn:=@rn+10 as vorder from (select id from videos where deletedAt is null order by video_order asc) t1, (select @rn:=0) as t2) src set videos.video_order = src.vorder where videos.id = src.id";
+        $sql = "update videos, "
+                . "(select id, @rn:=@rn+10 as vorder "
+                . "from (select id from videos "
+                . "where deletedAt is null "
+                . "and video_type = 'header' "
+                . "order by video_order asc) t1, "
+                . "(select @rn:=0) as t2) src "
+                . "set videos.video_order = src.vorder "
+                . "where videos.id = src.id";
 
         $conn = $entityManager->getConnection();
 
         $conn->exec($sql);
-        
-//        $query = $entityManager->createNativeQuery($sql, $rsm)->execute();
-//
-//        die(var_dump($query));
+    }
+    public function index2($args) {
+       
+        $entityManager = $args->getEntityManager();
+        $sql = "update videos, "
+                . "(select id, @rn:=@rn+10 as vorder "
+                . "from (select id from videos "
+                . "where deletedAt is null "
+                . "and video_type = 'front' "
+                . "order by video_order asc) t1, "
+                . "(select @rn:=0) as t2) src "
+                . "set videos.video_order = src.vorder "
+                . "where videos.id = src.id";
 
-        $this->container->get("logger")->info("Updated orders");
+        $conn = $entityManager->getConnection();
 
-//            $videos = $entityManager->getRepository("PolmediaBundle:Video")->getAllVideos();
-//
-//            $order = $step = 10;
-//
-//            /** @var Video video */
-//            foreach ($videos as $video) {
-//                $video->setOrder($order);
-//                $entityManager->persist($video);
-//                $this->container->get("logger")->info(sprintf("set video#%d order to %d", $video->getId(), $video->getOrder()));
-//                $order+=$step;
-//            }
+        $conn->exec($sql);
     }
 
 }

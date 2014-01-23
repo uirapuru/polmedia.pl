@@ -5,6 +5,7 @@ namespace Dende\PolmediaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dende\PolmediaBundle\Entity\Video;
 
 class VideoType extends AbstractType {
 
@@ -28,16 +29,22 @@ class VideoType extends AbstractType {
                 ->add('prizes', null, array("label" => "Nagrody"))
                 ->add('plot', "textarea", array("label" => "Fabuła"))
                 ->add('youtube', null, array("label" => "Id filmu youtube"))
-                ->add('isFront', null, array("label" => "Wyświetl na stronie głównej"))
-                ->add('isMain', null, array("label" => "Wyświetl w nagłówku strony głównej"))
+                ->add('type', "choice", array("label"       => "Główna strona", "choices"     => array(
+                        Video::TYPE_HEADER => "w nagłówku (cała szerokość)",
+                        Video::TYPE_FRONT  => "poniżej nagłówka"
+                    ),
+                    "required"    => false,
+                    "empty_value" => "nie pokazuj na głównej",
+                    "empty_data"  => Video::TYPE_NONE
+                ))
                 ->add('mainImage', "hidden")
                 ->add('imageFile', "file", array(
-                    "mapped" => false,
-                    "attr"   => array(
+                    "mapped"   => false,
+                    "attr"     => array(
                         "data-url" => $this->uploaderHelper->endpoint('mainImage')
                     ),
                     "required" => false,
-                    "label"  => "Obraz okładki"
+                    "label"    => "Obraz okładki"
                 ))
                 ->add('category', null, array("label" => "Kategoria filmu"))
         ;

@@ -49,12 +49,12 @@ class VideoRepositoryTest extends WebTestCase {
 // </editor-fold>
 
     public function testGetPromotedIndex() {
-        $result = $this->repository->getPromotedVideos();
+        $result = $this->repository->getFrontVideos();
         $this->assertCount(5, $result);
     }
 
-    public function testGetMainVideos() {
-        $result = $this->repository->getMainVideos();
+    public function testgetHeaderVideos() {
+        $result = $this->repository->getHeaderVideos();
         $this->assertCount(1, $result);
     }
 

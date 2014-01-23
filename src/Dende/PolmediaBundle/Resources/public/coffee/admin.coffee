@@ -1,6 +1,6 @@
 $ ->
   $("#videosAdminList").dataTable
-    "aaSorting": [[ 5, "asc" ]],
+    "aaSorting": [[ 2, "desc" ],[ 3, "desc" ],[ 4, "asc" ],],
       "aoColumns": [
         null,
         null,
@@ -9,9 +9,7 @@ $ ->
         null
       ]
       
-  $("#imagesAdminList").dataTable(
-
-  )
+  $("#imagesAdminList").dataTable()
   
   $(document).on "click", "span.saveOrder", (e) ->
     console.log "order changed"
